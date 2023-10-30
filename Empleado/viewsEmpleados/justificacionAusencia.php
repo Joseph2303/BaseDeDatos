@@ -104,6 +104,14 @@ include("../db.php");
                 <td>
                     <input type="checkbox" class="justify-checkbox">
                 </td>
+  <td>
+    <input type="checkbox" class="select-checkbox">
+    <form class="justificacion-form" style="display: none;">
+      <!-- Aquí coloca los campos para justificar la ausencia -->
+      <input type="text" name="razon" placeholder="Razón de la ausencia">
+      <button type="submit">Enviar</button>
+    </form>
+  </td>
             </tr>
         </tbody>
     </table>
