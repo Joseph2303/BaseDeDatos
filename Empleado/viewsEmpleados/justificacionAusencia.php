@@ -86,57 +86,40 @@ include("../db.php");
 </style>
 <body>
   <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9)">
-  <h1 class="text-center">Justificación De Ausencia</h1>
     <div class="row">
-      <div class="col-md-12" >
-
-        <?php if (isset($_SESSION['message'])) { ?>
-          <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
-            <?= htmlspecialchars($_SESSION['message']) ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        <?php unset($_SESSION['message']);
-        } ?>
-        <div class="card card-body">
-          <form action="justificacionAusencia/save.php" method="POST">
-            <div class="form-group">
-              <label>Fecha de Ausencia</label>
-              <input name="fechaAusencia" type="date" class="form-control" placeholder="Fecha de Ausencia" required>
-            </div>
-            <div class="form-group">
-              <label>Archivos</label>
-              <input name="archivos" type="file" class="form-control-file">
-            </div>
-            <div class="form-group">
-              <label>Justificación</label>
-              <input name="justificacion" type="text" class="form-control" placeholder="Justificación" required>
-            </div>
-            <div class="form-group">
-            <label for="puesto">ID del empleado</label>
-                <select name="idEmpleado" class="form-control" required>
-                    <option value="">Seleccione el usuario</option>
-                    <?php
-                    $query = "SELECT idEmpleado, nombre FROM empleado"; 
-                    $stmt = $GLOBALS['conn']->query($query);
-                    $empleados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                    foreach ($empleados as $empleado) {
-                        echo "<option value='" . htmlspecialchars($empleado['idEmpleado']) . "'> Empleado: " . htmlspecialchars($empleado['nombre']) . " - ID: " . htmlspecialchars($empleado['idEmpleado']) . "</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <input type="submit" name="save" class="btn btn-success btn-block" value="Guardar">
-            
-            <!-- Botón para crear registro automáticamente -->
-            
-            </div>
-          </div>
-        </form>
+      <div class="search-form col-10">
+      <h1 class="text-center">Justificación de Ausencias</h1>
       </div>
+      <div class="col-md-9"  style="padding-left: 2rem;">  
+      <table class="table table-bordered" style="padding-left: 2rem;">
+        <thead>
+            <tr>
+                <th>Fecha Ausente</th>
+                <th>Accion</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr>
+              <td>29/10/2023</td> 
+                <td>
+                    <input type="checkbox" class="justify-checkbox">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+      </div><!--Cuando se selecciones un checkbox debe aparecer el boton de editar-->
     </div>
   </main>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var checkboxes = document.querySelectorAll('.justify-checkbox');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var form = this.parentElement.nextElementSibling.querySelector('.justify-form');
+                form.style.display = this.checked ? 'block' : 'none';
+            });
+        });
+    });
+</script>
 </html>

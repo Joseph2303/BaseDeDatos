@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <title>HCR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <!-- BOOTSTRAP 4 -->
   <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
@@ -47,7 +48,7 @@
 
             setTimeout(function() {
                 preloader.style.display = 'none';
-            }, 5000); 
+            }, 600); 
         });
 
   </script>
@@ -76,6 +77,17 @@
             padding: 20px;
            }
 
+/*asasasas*/
+  .barra {
+    max-height: 900px;
+    overflow-y: auto;
+    background-color: #f8f8f8; /* Cambia el color de fondo según tu preferencia */
+    border: 1px solid #ccc; /* Agrega un borde al contenedor si lo deseas */
+    padding: 10px; /* Espaciado interno dentro del contenedor */
+  }
+
+
+/*asasasas*/
 .container {
   margin-bottom: 20px;
 }
@@ -85,9 +97,13 @@
         border-radius: 10px;
         padding: 5px 10px;
         margin: 5px 0;
+        width: 75%;
         display: inline-block;
         text-decoration: none;
         color: white;
+        margin-right: 10px;
+        font-size: 20px;
+        color: #707070;
     }
 
 .nav-item:hover {
@@ -95,13 +111,17 @@
    }   
    
 .nav-item1 {
-        background-color: rgba(0, 203, 255, 0.200);
+  background-color: rgba(0, 203, 255, 0.200);
         border-radius: 10px;
         padding: 5px 10px;
         margin: 5px 0;
+        width: 110%;
         display: inline-block;
         text-decoration: none;
         color: white;
+        margin-right: 10px;
+        font-size: 20px;
+        color: #707070;
     }
 
 .nav-item1:hover {
@@ -124,7 +144,7 @@
 </head>
 <body style="background-image: url(img/aeropuerto-daniel-oduber-liberia.jpg);  background-repeat:  no-repeat;  background-size: cover ; font-family: 'century Gothic', sans-serif ;">
     <div class="preloader">
-        <img src="img/LogoDeCoriport.gif" style="width: 1400px; height: 760px;">
+        <img src="img/icons8-reloj-arena-abajo.gif">
     </div>
 <div class="barra">
   <img src="img/siglas_coriport.png" style=" width: 230px; height: 110px;">
@@ -139,19 +159,23 @@
           <h3 class="text-primary">Perfil de Empleado</h3>
           </div>
           <li class="nav-item">
-              <a class="nav-link bi bi-cup-straw" href="#" onclick="changeView(\'diasFeriados\')">Días Feriados</a>
+              <a class="nav-link bi bi-cup-straw icon" href="#" onclick="changeView(\'diasFeriados\')"> Días Feriados</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bi bi-calendar" href="#" onclick="changeView(\'horario\')">Resgitrar Asistencia</a>
+              <a class="nav-link bi bi-calendar icon" href="#" onclick="changeView(\'horario\')"> Resgitrar Asistencia</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bi bi-clipboard-check" href="#" onclick="changeView(\'justificacionAusencia\')">Justificación Ausencias</a>
+              <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionAusencia\')"> Justificación Ausencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bi bi-sun-fill" href="#" onclick="changeView(\'solicitudVacaciones\')">Solicitud de Vacaciones</a>
+              <a class="nav-link bi bi-sun-fill icon" href="#" onclick="changeView(\'solicitudVacaciones\')"> Solicitud de Vacaciones</a>
             </li>
+            <br>
+            <br>
+            <br>
+            <br>
             <li class="nav-item">
-              <a class="nav-link bi bi-box-arrow-right" href="viewsEmpleados/logoutEmpleado.php"  onclick="">Cerrar sesión</a>
+              <a class="nav-link bi bi-box-arrow-right icon" href="viewsEmpleados/logoutEmpleado.php"  onclick=""> Cerrar sesión</a>
             </li>
             </div>
           ';
@@ -162,28 +186,32 @@
          <center><h3 style="color: black; class="text-success">Perfil de Encargado</h3></center>
           </div>
             <li class="nav-item1">
-              <a class="nav-link bi bi-calendar-plus" href="#" onclick="changeView2(\'crearFeriado\')" style="color: black;">Crear Días Feriados</a>
+              <a class="nav-link bi bi-calendar-plus" href="#" onclick="changeView2(\'crearFeriado\')" style="color: black;"> Crear Días Feriados</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-person-plus" href="#" onclick="changeView2(\'crearEmpleado\')" style="color: black;">Crear Empleado</a>
+              <a class="nav-link bi bi-person-plus" href="#" onclick="changeView2(\'crearEmpleado\')" style="color: black;"> Crear Empleado</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-envelope" href="#" onclick="changeView2(\'aprovacionJustificacion\')" style="color: black;">Justificaciones de Ausencias</a>
+              <a class="nav-link bi bi-envelope" href="#" onclick="changeView2(\'aprovacionJustificacion\')" style="color: black;"> Justificaciones de Ausencias</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-airplane bi bi-calendar-check" href="#" onclick="changeView2(\'aprovacionVacaciones\')" style="color: black;">Aprobación de Vacaciones</a>
+              <a class="nav-link bi bi-airplane bi bi-calendar-check" href="#" onclick="changeView2(\'aprovacionVacaciones\')" style="color: black;"> Aprobación de Vacaciones</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroTardia\')" style="color: black;">Registro de Tardía</a>
+              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroTardia\')" style="color: black;"> Registro de Tardía</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'editUser\')" style="color: black;">Modificar Usuario</a>
+              <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'editUser\')" style="color: black;"> Modificar Usuario</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;">Puestos de la Empresa</a>
+              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;"> Puestos de la Empresa</a>
             </li>
+            <br>
+            <br>
+            <br>
+            <br>
             <li class="nav-item1">
-              <a class="nav-link bi bi-box-arrow-right" href="viewsEncargados/logoutAdmin.php" onclick="" style="color: black;">Cerrar sesión</a>
+              <a class="nav-link bi bi-box-arrow-right" href="viewsEncargados/logoutAdmin.php" onclick="" style="color: black;"> Cerrar sesión</a>
             </li>
           ';
       } else {
@@ -196,6 +224,7 @@
       ?>
     </ul>
     </div>
+
   <?php
   if (isset($_SESSION['message'])) {
     echo '<div id="success-message" class="alert alert-success">' . $_SESSION['message'] . '</div>';

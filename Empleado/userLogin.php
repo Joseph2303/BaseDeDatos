@@ -37,10 +37,43 @@
     border-color: #ff0000;
   }
 
+  .preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white; /* o cualquier otro color de fondo que prefieras */
+            z-index: 9999; /* para que aparezca por encima de todo lo demás */
+        }
+
 </style>
+<script>
+
+window.addEventListener('load', function() {
+       var preloader = document.querySelector('.preloader');
+       
+       preloader.classList.add('hide');
+
+       setTimeout(function() {
+           preloader.style.display = 'none';
+       }, 5000); 
+   });
+
+setTimeout(function() {
+ document.getElementById('success-message').style.display = 'none';
+}, 9500);
+</script>
+
 <body style="background-image: url(img/copy_of_078a0158-e1619707652706-1026x536-c-45x79.jpg); 
 background-repeat: no-repeat; background-size: cover; font-family: 'century Gothic', sans-serif ;">
-
+  <div class="preloader">
+        <img src="img/LogoDeCoriport.gif" style="width: 1400px; height: 760px; background-size: cover;">
+    </div>
+<div>   
 <div class="d-flex justify-content-center align-items-center vh-100">
 
 <div class="p-5 rounded-5 text-secondary shadow" 
@@ -75,9 +108,5 @@ style="background-color: rgba(32, 124, 196, 0.8);">
     unset($_SESSION['message_danger']);
   }
   ?>
-
-  <script>
-    setTimeout(function() {
-      document.getElementById('success-message').style.display = 'none';
-    }, 9500);
-  </script>
+</div> 
+  </body>

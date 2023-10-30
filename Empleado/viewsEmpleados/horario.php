@@ -1,11 +1,5 @@
 <?php include("../db.php"); 
-/*if(!isset($_SESSION['tipoUsuario'])){
-  header('location: ../userLogin.php');
-}else{
-  if($_SESSION['tipoUsuario'] != 'empleado'){
-      header('location: ../userLogin.php');
-  }
-}*/
+
 ?>
 <style>
   .container {
@@ -90,7 +84,7 @@
         <form action="horario/save.php" method="POST">
           <h3>Marcar entrada</h3>
           <div class="form-group">
-            <input name="idEmpleado" type="text" class="form-control" placeholder="ID Empleado" required>
+   
           </div>
           <input class="btn btn-success btn-block" type="submit" name="save" value="Marcar Entrada">
         </form>
@@ -113,7 +107,6 @@
         <form action="horario/edit.php" method="POST">
           <h3>Marcar salida</h3>
           <div class="form-group">
-            <input name="idEmpleado" type="text" class="form-control" placeholder="ID Empleado" required>
           </div>
           <input class="btn btn-info btn-block" type="submit" name="update" value="Marcar Salida">
         </form>

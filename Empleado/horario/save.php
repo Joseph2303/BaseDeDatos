@@ -1,13 +1,20 @@
 <?php
 include('../db.php');
-
 if (isset($_POST['save'])) {
-    $idEmpleado = $_POST['idEmpleado'];
+    if (isset($_SESSION['userdata']) && isset($_SESSION['userdata']['idUsuario'])) {
+        $idUsuario = $_SESSION['userdata']['idUsuario'];
 
-    // Ajustar la zona horaria a Costa Rica
+        $userdataQuery = "SELECT * FROM empleado WHERE idUsuario = :idUsuario";
+        $stmt = $conn->prepare($userdataQuery);
+        $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_STR);
+        $stmt->execute();
+        $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['empleadoData'] = $empleado;
+        $idEmpleado = $empleado['idEmpleado'];
+   
     date_default_timezone_set('America/Costa_Rica');
 
-    // Obtener la fecha y hora actual
+
     $horaInicio = date('h:i:s A');
     $fecha = date('Y-m-d');
 
@@ -15,6 +22,7 @@ if (isset($_POST['save'])) {
         // El ID del empleado no existe
         $_SESSION['message_entrada'] = 'Error, el ID del empleado no existe en la base de datos.';
         $_SESSION['message_type_entrada'] = 'danger';
+        
         header('Location: ../index.php');
         $_SESSION['horario_saved'] = true;
         exit();
@@ -42,6 +50,15 @@ if (isset($_POST['save'])) {
     }
     $_SESSION['horario_saved'] = true;
     header('Location: ../index.php');
+
+    } else {
+        
+        $_SESSION['message_entrada'] = "No se ha encontrado el nombre de usuario en la sesión.";
+        $_SESSION['message_type_entrada'] = 'danger';
+        exit();
+    }
+    
+
 }
 
 function existsHorario($fecha, $idEmpleado) {

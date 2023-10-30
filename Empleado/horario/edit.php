@@ -8,7 +8,9 @@ $fecha = '';
 $idEmpleado = '';
 
 if (isset($_POST['update'])) {
-    $idEmpleado = $_POST['idEmpleado'];
+
+  if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmpleado'])) {
+    $idEmpleado = $_SESSION['empleadoData']['idEmpleado'];
 
     date_default_timezone_set('America/Costa_Rica');
     $fecha = date('Y-m-d');
@@ -22,45 +24,51 @@ if (isset($_POST['update'])) {
     $count = $stmt->fetchColumn();
 
 
-    if ($count>0) {
-   
-        $horaFin = date('H:i:s'); 
-        try {
-            $query = "EXEC paActualizarHorario  @nuevaHoraFin=? , @nuevaFecha=?,@nuevoIdEmpleado=?";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(1, $horaFin, PDO::PARAM_STR);
-            $stmt->bindParam(2, $fecha, PDO::PARAM_STR);           
-            $stmt->bindParam(3, $idEmpleado, PDO::PARAM_INT);
+    if ($count > 0) {
 
-            $stmt->execute();
-            if($stmt->errorCode() === '00000'){
-              $_SESSION['message_salida'] = 'Buen trabajo!! Nos vemos mañana';
-              $_SESSION['message_type_salida'] = 'info';
-              $_SESSION['horario_edit'] = true;
-              header('Location: ../index.php');
-            exit();
-            }else{
+      $horaFin = date('H:i:s');
+      try {
+        $query = "EXEC paActualizarHorario  @nuevaHoraFin=? , @nuevaFecha=?,@nuevoIdEmpleado=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(1, $horaFin, PDO::PARAM_STR);
+        $stmt->bindParam(2, $fecha, PDO::PARAM_STR);
+        $stmt->bindParam(3, $idEmpleado, PDO::PARAM_INT);
 
-            }
-        } catch (PDOException $exp) {
-            $_SESSION['message_salida'] = 'Error al actualizar la hora de salida: ' . $exp->getMessage();
-            $_SESSION['message_type_salida'] = 'danger';
-            $_SESSION['horario_edit'] = true;
-            header('Location: ../index.php');
-            exit();
+        $stmt->execute();
+        if ($stmt->errorCode() === '00000') {
+          $_SESSION['message_salida'] = 'Buen trabajo!! Nos vemos mañana';
+          $_SESSION['message_type_salida'] = 'info';
+          $_SESSION['horario_edit'] = true;
+          header('Location: ../index.php');
+          exit();
+        } else {
         }
-    } else {
-        $_SESSION['message_salida'] = 'Debes primeramente marcar tu entrada ';
+      } catch (PDOException $exp) {
+        $_SESSION['message_salida'] = 'Error al actualizar la hora de salida: ' . $exp->getMessage();
         $_SESSION['message_type_salida'] = 'danger';
         $_SESSION['horario_edit'] = true;
         header('Location: ../index.php');
         exit();
+      }
+    } else {
+      $_SESSION['message_salida'] = 'Debes primeramente marcar tu entrada ';
+      $_SESSION['message_type_salida'] = 'danger';
+      $_SESSION['horario_edit'] = true;
+      header('Location: ../index.php');
+      exit();
     }
+  } else {
+    $_SESSION['message_salida'] = 'ERROR ';
+    $_SESSION['message_type_salida'] = 'danger';
+    $_SESSION['horario_edit'] = true;
+    header('Location: ../index.php');
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Editar Horario</title>
@@ -81,6 +89,7 @@ if (isset($_POST['update'])) {
     }
   </style>
 </head>
+
 <body>
   <div class="container p-4">
     <div class="row justify-content-center">
@@ -128,6 +137,5 @@ if (isset($_POST['update'])) {
     </div>
   </div>
 </body>
+
 </html>
-
-

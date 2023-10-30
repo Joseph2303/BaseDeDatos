@@ -1,74 +1,16 @@
 <?php
 include("../db.php");
-/*
-<?php
-    session_start();
-
-    if(isset($_GET['cerrar_sesion'])){
-        session_unset(); 
-
-        // destroy the session 
-        session_destroy(); 
-    }
-    
-    if(isset($_SESSION['tipoUsuario'])){
-        switch($_SESSION['tipoUsuario']){
-            case 1:
-                header('location: ../index.php');
-            break;
-
-            case 2:
-            header('location: ../index.php');
-            break;
-
-            default:
-        }
-    }
-
-    if(isset($_POST['username']) && isset($_POST['password'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $db = new Database();
-        $query = $db->connect()->prepare('SELECT * FROM usuario WHERE username = :username AND password = :password');
-        $query->execute(['username' => $username, 'password' => $password]);
-
-        $row = $query->fetch(PDO::FETCH_NUM);
-        
-        if($row == true){
-            $tipoUsuario = $row[3];
-            
-            $_SESSION['tipoUsuario'] = $tipoUsuario;
-            switch($tipoUsuario){
-                case 1:
-                    header('location: ../index.php');
-                break;
-
-                case 2:
-                header('location: ../index.php');
-                break;
-
-                default:
-            }
-        }else{
-            // no existe el usuario
-            echo "Nombre de usuario o contraseña incorrecto";
-        }
-        
-
-    }
-*/
-
+session_start();
 function login($username, $contrasena) {
   global $conn;
 
-  $query = "EXEC paIniciarSesion @username = ?, @contrasena = ?";
+  $query = "EXEC paIniciarSesion @username = :username, @contrasena = :contrasena";
   $stmt = $conn->prepare($query);
-  $stmt->bindParam(1, $username, PDO::PARAM_STR);
-  $stmt->bindParam(2, $contrasena, PDO::PARAM_STR);
+  $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+  $stmt->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
   $stmt->execute();
   $result = $stmt->fetch(PDO::FETCH_ASSOC);
-  
+
   if ($result) {
     return $result;
   } else {
@@ -86,42 +28,31 @@ if (isset($_POST['login'])) {
       $_SESSION['logged_in'] = true;
       $_SESSION['logged_in_admin'] = false;
 
-
-      $existingSolicitudQuery = "SELECT * FROM usuario WHERE username = $username";
-      $stmt = $conn->prepare($existingSolicitudQuery);
-      $stmt->bindParam(1, $username, PDO::PARAM_STR);
+      $userdataQuery = "SELECT * FROM usuario WHERE username = :username";
+      $stmt = $conn->prepare($userdataQuery);
+      $stmt->bindParam(':username', $username, PDO::PARAM_STR);
       $stmt->execute();
-
       $userdata = $stmt->fetch(PDO::FETCH_ASSOC);
 
+      if ($userdata) {
+        $_SESSION['userdata'] =  $userdata;
+    
+        var_dump($_SESSION['userdata']);
+        $_SESSION['message'] = '¡Inicio de sesión exitoso! Bienvenido, '.$usuario['tipoUsuario'].': ' . $username. '.';
+        header('Location: ../index.php');
+      }
 
-      $_SESSION['message'] = '¡Inicio de sesión exitoso! Bienvenido,'.$usuario['tipoUsuario'].': ' . $username. '.';
-      header('Location: ../index.php');
-      exit();
+
     } elseif ($usuario['tipoUsuario'] == 'admin') {
       $_SESSION['logged_in_admin'] = true;
       $_SESSION['logged_in'] = false;
 
       $_SESSION['message'] = '¡Inicio de sesión exitoso! Bienvenido, '.$usuario['tipoUsuario'].': ' . $username. '.';
       header('Location: ../index.php');
-      exit();
     }
   } else {
-    $_SESSION['message_danger'] = 'Inicio de sesión fallido. Credenciales inválidas.'.$usuario['tipoUsuario'];
-
+    $_SESSION['message_danger'] = 'Inicio de sesión fallido. Credenciales inválidas.';
     header('Location: ../userlogin.php');
-    exit();
   }
 }
 ?>
-<script>
-  // Obtén los datos del usuario del servidor y almacénalos en el localStorage
-
-    var userData = <?php echo json_encode($userdata); ?>; 
-    if(userData){
-      localStorage.setItem('userData', JSON.stringify(userData));
-    }
-</script>
-
-
-
