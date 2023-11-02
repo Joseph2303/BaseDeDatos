@@ -2,6 +2,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HCR</title>
@@ -41,112 +42,117 @@
         });
     }
     window.addEventListener('load', function() {
-            var preloader = document.querySelector('.preloader');
-            
-            preloader.classList.add('hide');
+      var preloader = document.querySelector('.preloader');
 
-            setTimeout(function() {
-                preloader.style.display = 'none';
-            }, 600); 
-        });
+      preloader.classList.add('hide');
 
+      setTimeout(function() {
+        preloader.style.display = 'none';
+      }, 600);
+    });
   </script>
-<style>
-        .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        }
-
-        .barra {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 15px; 
-            margin: 15px 0; 
-            margin-top: 1%;
-            margin-left: 1%;
-            margin-right: 1%;
-            margin-bottom: 1%;
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 95%;
-            width: 315px;
-            border-right: 1px solid #ccc;
-            padding: 20px;
-           }
-
-/*asasasas*/
-  .barra {
-    max-height: 900px;
-    overflow-y: auto;
-    background-color: #f8f8f8; /* Cambia el color de fondo según tu preferencia */
-    border: 1px solid #ccc; /* Agrega un borde al contenedor si lo deseas */
-    padding: 10px; /* Espaciado interno dentro del contenedor */
-  }
-
-
-/*asasasas*/
-.container {
-  margin-bottom: 20px;
-}
-
-.nav-item {
-        background-color: rgba(60, 241, 74, 0.200);
-        border-radius: 10px;
-        padding: 5px 10px;
-        margin: 5px 0;
-        width: 75%;
-        display: inline-block;
-        text-decoration: none;
-        color: white;
-        margin-right: 10px;
-        font-size: 20px;
-        color: #707070;
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-.nav-item:hover {
-        background-color: rgba(167, 241, 101);
-   }   
-   
-.nav-item1 {
-  background-color: rgba(0, 203, 255, 0.200);
-        border-radius: 10px;
-        padding: 5px 10px;
-        margin: 5px 0;
-        width: 110%;
-        display: inline-block;
-        text-decoration: none;
-        color: white;
-        margin-right: 10px;
-        font-size: 20px;
-        color: #707070;
+    .barra {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px 0;
+      margin-top: 1%;
+      margin-left: 1%;
+      margin-right: 1%;
+      margin-bottom: 1%;
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 95%;
+      width: 315px;
+      border-right: 1px solid #ccc;
+      padding: 20px;
     }
 
-.nav-item1:hover {
-        background-color: rgba(0, 203, 255);
-   }  
+    /*asasasas*/
+    .barra {
+      max-height: 900px;
+      overflow-y: auto;
+      background-color: #f8f8f8;
+      /* Cambia el color de fondo según tu preferencia */
+      border: 1px solid #ccc;
+      /* Agrega un borde al contenedor si lo deseas */
+      padding: 10px;
+      /* Espaciado interno dentro del contenedor */
+    }
 
-   .preloader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white; /* o cualquier otro color de fondo que prefieras */
-            z-index: 9999; /* para que aparezca por encima de todo lo demás */
-        }
-</style>
+
+    /*asasasas*/
+    .container {
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      background-color: rgba(60, 241, 74, 0.200);
+      border-radius: 10px;
+      padding: 5px 10px;
+      margin: 5px 0;
+      width: 75%;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      margin-right: 10px;
+      font-size: 20px;
+      color: #707070;
+    }
+
+    .nav-item:hover {
+      background-color: rgba(167, 241, 101);
+    }
+
+    .nav-item1 {
+      background-color: rgba(0, 203, 255, 0.200);
+      border-radius: 10px;
+      padding: 5px 10px;
+      margin: 5px 0;
+      width: 110%;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      margin-right: 10px;
+      font-size: 20px;
+      color: #707070;
+    }
+
+    .nav-item1:hover {
+      background-color: rgba(0, 203, 255);
+    }
+
+    .preloader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      /* o cualquier otro color de fondo que prefieras */
+      z-index: 9999;
+      /* para que aparezca por encima de todo lo demás */
+    }
+  </style>
 </head>
+
 <body style="background-image: url(img/aeropuerto-daniel-oduber-liberia.jpg);  background-repeat:  no-repeat;  background-size: cover ; font-family: 'century Gothic', sans-serif ;">
-    <div class="preloader">
-        <img src="img/icons8-reloj-arena-abajo.gif">
-    </div>
-<div class="barra">
-  <img src="img/siglas_coriport.png" style=" width: 230px; height: 110px;">
+  <div class="preloader">
+    <img src="img/icons8-reloj-arena-abajo.gif">
+  </div>
+  <div class="barra">
+    <img src="img/siglas_coriport.png" style=" width: 230px; height: 110px;">
     <div class="container">
     </div>
     <ul class="nav">
@@ -181,8 +187,7 @@
             </li>
             </div>
           ';
-      } 
-      elseif (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true) {
+      } elseif (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true) {
         echo '
         <div class="container1">
          <center><h3 style="color: black; class="text-success">Perfil de Encargado</h3></center>
@@ -194,7 +199,7 @@
               <a class="nav-link bi bi-person-plus" href="#" onclick="changeView2(\'crearEmpleado\')" style="color: black;"> Crear Empleado</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-envelope" href="#" onclick="changeView2(\'aprovacionJustificacion\')" style="color: black;"> Justificaciones de Ausencias</a>
+              <a class="nav-link bi bi-envelope" href="#" onclick="changeView2(\'aprovacionJustificacion\')" style="color: black;"> Aprobación de Ausencias</a>
             </li>
             <li class="nav-item1">
               <a class="nav-link bi bi-airplane bi bi-calendar-check" href="#" onclick="changeView2(\'aprovacionVacaciones\')" style="color: black;"> Aprobación de Vacaciones</a>
@@ -203,13 +208,22 @@
               <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroTardia\')" style="color: black;"> Registro de Tardía</a>
             </li>
             <li class="nav-item1">
+              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroAusentismo\')" style="color: black;"> Registro de Ausencia</a>
+            </li>
+            <li class="nav-item1">
               <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'editUser\')" style="color: black;"> Modificar Usuario</a>
+            </li>
+            <li class="nav-item1">
+              <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'justificacionAusencia\')" style="color: black;"> Justificación Ausencia</a>
             </li>
             <li class="nav-item1">
               <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;"> Puestos de la Empresa</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'horaExtra\')" style="color: black;"> Horas Extra</a>
+              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'marca\')" style="color: black;"> Marcas </a>
+            </li>
+            <li class="nav-item1">
+              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'HorasEncargado\')" style="color: black;"> Horas Extra</a>
             </li>
             <br>
             <br>
@@ -231,17 +245,17 @@
       }
       ?>
     </ul>
-    </div>
+  </div>
 
   <?php
   if (isset($_SESSION['message'])) {
     echo '<div id="success-message" class="alert alert-success">' . $_SESSION['message'] . '</div>';
     unset($_SESSION['message']);
-  }elseif(isset($_SESSION['val_close']) && $_SESSION['val_close'] === true){  
-      echo '<div id="success-message" class="alert alert-info">' . $_SESSION['message_close'] . '</div>';
-      unset($_SESSION['message_close']);
-      $_SESSION['val_close']=false;
-  }elseif(isset($_SESSION['message_danger'])){
+  } elseif (isset($_SESSION['val_close']) && $_SESSION['val_close'] === true) {
+    echo '<div id="success-message" class="alert alert-info">' . $_SESSION['message_close'] . '</div>';
+    unset($_SESSION['message_close']);
+    $_SESSION['val_close'] = false;
+  } elseif (isset($_SESSION['message_danger'])) {
     echo '<div id="success-message" class="alert alert-danger">' . $_SESSION['message_danger'] . '</div>';
     unset($_SESSION['message_danger']);
   }
@@ -267,35 +281,28 @@
     } elseif (isset($_SESSION['justificaion_message']) && $_SESSION['justificaion_message'] === true) {
       echo '<script>changeView("justificacionAusencia");</script>';
       unset($_SESSION['justificaion_message']);
-
     } elseif (isset($_SESSION['solicitud_empleado']) && $_SESSION['solicitud_empleado'] === true) {
-      echo '<script>changeView("solicitudVacaciones");</script>'; 
+      echo '<script>changeView("solicitudVacaciones");</script>';
       unset($_SESSION['solicitud_empleado']);
-
-    }
-    
-    elseif (isset($_SESSION['empleado_message']) && $_SESSION['empleado_message'] === true) {
+    } elseif (isset($_SESSION['empleado_message']) && $_SESSION['empleado_message'] === true) {
       echo '<script>changeView2("crearEmpleado");</script>';
       unset($_SESSION['empleado_message']);
-      
-    }  elseif (isset($_SESSION['feriado_message']) && $_SESSION['feriado_message'] === true) {
+    } elseif (isset($_SESSION['feriado_message']) && $_SESSION['feriado_message'] === true) {
       echo '<script>changeView2("crearFeriado");</script>';
       unset($_SESSION['feriado_message']);
-    }  elseif (isset($_SESSION['justificaion_message2']) && $_SESSION['justificaion_message2'] === true) {
+    } elseif (isset($_SESSION['justificaion_message2']) && $_SESSION['justificaion_message2'] === true) {
       echo '<script>changeView2("aprovacionjustificacion");</script>';
       unset($_SESSION['justificaion_message2']);
-      
     } elseif (isset($_SESSION['usuario_message']) && $_SESSION['usuario_message'] === true) {
       echo '<script>changeView2("editUser");</script>';
       unset($_SESSION['usuario_message']);
     } elseif (isset($_SESSION['encargado_solicitud']) && $_SESSION['encargado_solicitud'] === true) {
       echo '<script>changeView2("aprovacionVacaciones");</script>';
       unset($_SESSION['encargado_solicitud']);
-    }elseif (isset($_SESSION['puesto_message']) && $_SESSION['puesto_message'] === true) {
+    } elseif (isset($_SESSION['puesto_message']) && $_SESSION['puesto_message'] === true) {
       echo '<script>changeView2("puesto");</script>';
       unset($_SESSION['puesto_message']);
-    }
-    else {
+    } else {
       echo '
 
       <center>
@@ -310,8 +317,31 @@
   </div>
 </body>
 <script>
-function confirmarEliminacion() {
+  function confirmarEliminacion() {
     return confirm('¿Estás seguro de que deseas eliminar?');
-}
+  }
 </script>
+
+<script>
+    function mostrarFormulario(checkbox) {
+      var formulario = document.getElementById("formulario");
+      if (checkbox.checked) {
+        formulario.style.display = "block";
+      } else {
+        formulario.style.display = "none";
+      }
+    }
+  </script>
+  
+  <script>
+  document.getElementById('foto').addEventListener('change', function(e) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('imagen').src = e.target.result;
+      document.getElementById('imagen').style.display = 'block';
+    };
+    reader.readAsDataURL(this.files[0]);
+  });
+</script>
+
 </html>

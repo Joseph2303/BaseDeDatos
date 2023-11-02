@@ -1,17 +1,16 @@
 <?php include("../db.php");
 if (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true) {
-  $_SESSION['cont'] = true;
+  $_SESSION['cont'] = false;
 }
 include('../includ/proted.php');
 
-// Funcion de mostrar horas
-
-function consultaExtras()
+function consultaExtrasEn()
 {
-  $query = "SELECT * FROM horasExtra  ORDER BY idHorario DESC";
+  $query = "SELECT * FROM horasExtra ORDER BY idHorasExtra DESC";
 
   try {
     $stmt = $GLOBALS['conn']->prepare($query);
+    $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
   } catch (PDOException $e) {
@@ -19,7 +18,7 @@ function consultaExtras()
     return [];
   }
 }
-$horasExtra = consultaExtras();
+$horasExtra = consultaExtrasEn();
 
 ?>
 
@@ -103,7 +102,7 @@ $horasExtra = consultaExtras();
     <div class="col-md-10">
       <h1 class="text-center">Horas Extra</h1>
       <form method="POST" action="horasExtra/find.php">
-        <button class="btn btn-success" type="submit" name="">Buscar </button>
+        <button class="btn btn-info" type="submit" name="">Buscar </button>
       </form>
 
       <table class="table table-bordered">

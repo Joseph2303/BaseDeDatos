@@ -3,12 +3,19 @@ include("../db.php");
 function login($username, $contrasena) {
   global $conn;
 
+  $UsuarioIntento = $username;  
+
+  $consult = "EXEC paAgregarAuditoriaInicioSesion  @UsuarioIntento = :UsuarioIntento";
+  $stmt2 = $conn->prepare($consult);
+  $stmt2->bindParam(':UsuarioIntento', $UsuarioIntento, PDO::PARAM_STR);
+  $stmt2->execute();
+
+
+
   $query = "EXEC paIniciarSesion @username = :username, @contrasena = :contrasena ";
   $stmt = $conn->prepare($query);
   $stmt->bindParam(':username', $username, PDO::PARAM_STR);
   $stmt->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
-
-
 
   $stmt->execute();
   $result = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -8,10 +8,11 @@ include('../includ/proted.php');
 
 function consultaExtras()
 {
-  $query = "SELECT * FROM horasExtra  ORDER BY idHorario DESC";
+  $query = "SELECT * FROM horasExtra  ORDER BY idHorasExtra DESC";
 
   try {
     $stmt = $GLOBALS['conn']->prepare($query);
+    $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
   } catch (PDOException $e) {
@@ -112,7 +113,6 @@ $horasExtra = consultaExtras();
             <th>ID horas extras</th>
             <th>Total de horas</th>
             <th>Cantidad de extras </th>
-            <th>ID horario</th>
           </tr>
         </thead>
         <tbody>
@@ -121,7 +121,6 @@ $horasExtra = consultaExtras();
               <td><?php echo htmlspecialchars($row['idHorasExtra']); ?></td>
               <td><?php echo htmlspecialchars($row['maxHora']); ?></td>
               <td><?php echo htmlspecialchars($row['cantidadHora']); ?></td>
-              <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
             </tr>
           <?php } ?>
         </tbody>

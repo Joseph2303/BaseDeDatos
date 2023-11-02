@@ -130,10 +130,7 @@ $usuarios = consultarUsuarios();
                         <td><?php echo htmlspecialchars($row['username']); ?></td>
                         <td><?php echo htmlspecialchars($row['tipoUsuario']); ?></td>
                         <td>
-                        <!-- Cambios listo para borrar y editar probar y escribir aca
-                            
-                            
-                        -->   
+                        
                             <a href="usuario/edit.php?idUsuario=<?php echo htmlspecialchars($row['idUsuario']); ?>" class="btn btn-info">
                                 <i class="fas fa-marker"></i>
                             </a>
