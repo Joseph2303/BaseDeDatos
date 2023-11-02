@@ -3,7 +3,7 @@ include("../db.php");
 function login($username, $contrasena) {
   global $conn;
 
-  $query = "EXEC paIniciarSesion @username = :username, @contrasena = :contrasena, ";
+  $query = "EXEC paIniciarSesion @username = :username, @contrasena = :contrasena ";
   $stmt = $conn->prepare($query);
   $stmt->bindParam(':username', $username, PDO::PARAM_STR);
   $stmt->bindParam(':contrasena', $contrasena, PDO::PARAM_STR);
