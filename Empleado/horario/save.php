@@ -14,7 +14,6 @@ if (isset($_POST['save'])) {
    
     date_default_timezone_set('America/Costa_Rica');
 
-
     $horaInicio = date('h:i:s A');
     $fecha = date('Y-m-d');
 

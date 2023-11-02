@@ -1,12 +1,9 @@
 <?php include("../db.php");
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+  $_SESSION['cont'] = false;
+}
+include('../includ/proted.php');
 
-/*if(!isset($_SESSION['tipoUsuario'])){
-  header('location: ../userLogin.php');
-}else{
-  if($_SESSION['tipoUsuario'] != 'admin'){
-      header('location: ../userLogin.php');
-  }
-}*/
 function consultarJustificacion() {
   $query = "SELECT * FROM justificacionAusencia ORDER BY idJustificacionAusencia DESC";
 
@@ -55,7 +52,7 @@ $justificacion = consultarJustificacion(); ?>
     }
 
     th {
-      background-color: #333;
+      background-color: #8CB8D7;
       color: #fff;
     }
 

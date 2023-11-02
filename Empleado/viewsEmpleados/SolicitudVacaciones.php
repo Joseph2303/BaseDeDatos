@@ -1,14 +1,9 @@
 <?php
 include("../db.php");
-
-/*if(!isset($_SESSION['tipoUsuario'])){
-  header('location: ../userLogin.php');
-}else{
-  if($_SESSION['tipoUsuario'] != 'empleado'){
-      header('location: ../userLogin.php');
-  }
+if (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true) {
+  $_SESSION['cont'] = true;
 }
-*/
+include('../includ/proted.php');
 
 function consultarSolicitudVacaciones() {
   $query = "SELECT * FROM solicitudVacaciones ORDER BY idSolicitudVacaciones DESC";
@@ -54,7 +49,7 @@ $solicitudVacaciones = consultarSolicitudVacaciones();
   }
 
   th {
-    background-color: #333;
+    background-color: #93D78C;
     color: #fff;
   }
 

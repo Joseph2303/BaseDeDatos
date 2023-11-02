@@ -1,4 +1,8 @@
 <?php include("../db.php"); 
+if (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true) {
+  $_SESSION['cont'] = true;
+}
+include('../includ/proted.php');
 
 ?>
 <style>
@@ -27,7 +31,7 @@
   }
 
   th {
-    background-color: #333;
+    background-color: #93D78C;
     color: #fff;
   }
 

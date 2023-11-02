@@ -1,5 +1,4 @@
 <?php
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -168,6 +167,9 @@
               <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionAusencia\')"> Justificación Ausencias</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link bi bi-sun-fill icon" href="#" onclick="changeView(\'horasExtra\')"> Horas Extra</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link bi bi-sun-fill icon" href="#" onclick="changeView(\'solicitudVacaciones\')"> Solicitud de Vacaciones</a>
             </li>
             <br>
@@ -206,6 +208,9 @@
             <li class="nav-item1">
               <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;"> Puestos de la Empresa</a>
             </li>
+            <li class="nav-item1">
+              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'horaExtra\')" style="color: black;"> Horas Extra</a>
+            </li>
             <br>
             <br>
             <br>
@@ -215,6 +220,9 @@
             </li>
           ';
       } else {
+        unset($_SESSION['logged_in_admin']);
+        unset($_SESSION['logged_in']);
+        unset($_SESSION['authentication']);
         echo '
           <li class="nav-item">
             <a class="nav-link bi bi-door-open-fill" href="userLogin.php">Iniciar Sesión</a>

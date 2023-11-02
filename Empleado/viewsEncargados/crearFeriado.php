@@ -1,13 +1,13 @@
 <?php
 include("../db.php");
-/*if(!isset($_SESSION['tipoUsuario'])){
-  header('location: ../userLogin.php');
-}else{
-  if($_SESSION['tipoUsuario'] != 'admin'){
-      header('location: ../userLogin.php');
-  }
-}*/
-function consultarDiasFeriados() {
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    $_SESSION['cont'] = false;
+}
+
+include('../includ/proted.php');
+
+function consultarDiasFeriados()
+{
     $query = "SELECT * FROM diasFeriados ORDER BY idDiasFeriados DESC";
 
     try {
@@ -26,9 +26,9 @@ $feriados = consultarDiasFeriados();
 <style>
     .container {
         margin-left: 22%;
-    margin-right: 22%;
-    margin-top: 1%;
-    background-color: rgba(255, 255, 255, 0.9);
+        margin-right: 22%;
+        margin-top: 1%;
+        background-color: rgba(255, 255, 255, 0.9);
     }
 
     .alert {
@@ -52,7 +52,7 @@ $feriados = consultarDiasFeriados();
     }
 
     th {
-        background-color: #333;
+        background-color: #8CB8D7;
         color: #fff;
     }
 
@@ -98,10 +98,10 @@ $feriados = consultarDiasFeriados();
 </style>
 
 <main class="container p-4 col-8">
-   
+
     <div class="row">
         <div class="col-4">
-        <h1 class="text-center">Dias Feriados</h1>
+            <h1 class="text-center">Dias Feriados</h1>
             <!-- MESSAGES -->
             <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
@@ -153,14 +153,14 @@ $feriados = consultarDiasFeriados();
                     </tr>
                 </thead>
                 <tbody>
-    <?php foreach ($feriados as $row) { ?>
-        <tr onclick="selectRow(<?php echo $row['idDiasFeriados']; ?>)">
-            <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-            <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-            <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
-        </tr>
-    <?php } ?>
-</tbody>
+                    <?php foreach ($feriados as $row) { ?>
+                        <tr onclick="selectRow(<?php echo $row['idDiasFeriados']; ?>)">
+                            <td><?php echo htmlspecialchars($row['fecha']); ?></td>
+                            <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+                            <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     </div>

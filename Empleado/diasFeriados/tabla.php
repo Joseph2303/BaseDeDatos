@@ -5,8 +5,6 @@ function buscarFeriado($parametroBuscar)
 {
     global $conn;
 
-
-
     $sql = "EXEC paBuscarDiasFeriado @parametroBuscar = :parametroBuscar";
     $stmt = $conn->prepare($sql);
 
@@ -17,6 +15,7 @@ function buscarFeriado($parametroBuscar)
     if ($stmt->execute()) {
         $feriados = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $feriados;
+
     } else {
         $_SESSION['message_danger2'] = 'Error al buscar el feriado.';
         return null;

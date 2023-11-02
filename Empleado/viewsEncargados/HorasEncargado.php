@@ -4,12 +4,14 @@ if (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true
 }
 include('../includ/proted.php');
 
-function consultarDiasFeriados()
+// Funcion de mostrar horas
+
+function consultaExtras()
 {
-  $query = "SELECT * FROM diasferiados ORDER BY idDiasFeriados DESC";
+  $query = "SELECT * FROM horasExtra  ORDER BY idHorario DESC";
 
   try {
-    $stmt = $GLOBALS['conn']->query($query);
+    $stmt = $GLOBALS['conn']->prepare($query);
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
   } catch (PDOException $e) {
@@ -17,9 +19,10 @@ function consultarDiasFeriados()
     return [];
   }
 }
+$horasExtra = consultaExtras();
 
-$diasFeriados = consultarDiasFeriados();
 ?>
+
 <br>
 <style>
   .container {
@@ -48,7 +51,7 @@ $diasFeriados = consultarDiasFeriados();
   }
 
   th {
-    background-color: #93D78C;
+    background-color: #8CB8D7;
     color: #fff;
   }
 
@@ -92,33 +95,33 @@ $diasFeriados = consultarDiasFeriados();
     clear: both;
   }
 </style>
-<main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9) ;">
+<<main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9) ;">
   <div class="row">
     <div class="col-md-10">
       <!---->
     </div>
     <div class="col-md-10">
-      <h1 class="text-center">Días Feriados</h1>
-      <form method="POST" action="diasFeriados/find.php">
+      <h1 class="text-center">Horas Extra</h1>
+      <form method="POST" action="horasExtra/find.php">
         <button class="btn btn-success" type="submit" name="">Buscar </button>
       </form>
 
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>ID de dias Feriado</th>
-            <th>Dia Feriado</th>
-            <th>Descripcion</th>
-            <th>Tipo De Feriado</th>
+            <th>ID horas extras</th>
+            <th>Total de horas</th>
+            <th>Cantidad de extras </th>
+            <th>ID horario</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($diasFeriados as $row) { ?>
+          <?php foreach ($horasExtra as $row) { ?>
             <tr>
-              <td><?php echo htmlspecialchars($row['idDiasFeriados']); ?></td>
-              <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-              <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-              <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
+              <td><?php echo htmlspecialchars($row['idHorasExtra']); ?></td>
+              <td><?php echo htmlspecialchars($row['maxHora']); ?></td>
+              <td><?php echo htmlspecialchars($row['cantidadHora']); ?></td>
+              <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
             </tr>
           <?php } ?>
         </tbody>
