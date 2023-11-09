@@ -134,7 +134,7 @@ $feriados = consultarDiasFeriados();
                         </select>
                     </div>
 
-                    <input type="submit" name="save" class="btn btn-success btn-block" value="Guardar">
+                    <input class="btn btn-info btn-block" type="submit" name="save" value="Guardar">
                 </form>
             </div>
         </div>
@@ -154,7 +154,8 @@ $feriados = consultarDiasFeriados();
                 </thead>
                 <tbody>
                     <?php foreach ($feriados as $row) { ?>
-                        <tr onclick="selectRow(<?php echo $row['idDiasFeriados']; ?>)">
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['idDiasFeriados']); ?></td>
                             <td><?php echo htmlspecialchars($row['fecha']); ?></td>
                             <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
                             <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>

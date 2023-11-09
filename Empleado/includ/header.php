@@ -170,10 +170,13 @@
               <a class="nav-link bi bi-calendar icon" href="#" onclick="changeView(\'horario\')"> Resgitrar Asistencia</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionAusencia\')"> Justificación Ausencias</a>
+              <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionAusencia\')"> Justificación de Ausencias</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bi bi-sun-fill icon" href="#" onclick="changeView(\'horasExtra\')"> Horas Extra</a>
+            <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionTardia\')"> Justificación de Tardias</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link bi bi-hourglass-split icon" href="#" onclick="changeView(\'horasExtra\')"> Horas Extra</a>
             </li>
             <li class="nav-item">
               <a class="nav-link bi bi-sun-fill icon" href="#" onclick="changeView(\'solicitudVacaciones\')"> Solicitud de Vacaciones</a>
@@ -193,44 +196,44 @@
          <center><h3 style="color: black; class="text-success">Perfil de Encargado</h3></center>
           </div>
             <li class="nav-item1">
-              <a class="nav-link bi bi-calendar-plus" href="#" onclick="changeView2(\'crearFeriado\')" style="color: black;"> Crear Días Feriados</a>
+              <a class="nav-link bi bi-calendar-plus" href="#" onclick="changeView2(\'crearFeriado\')" style="color: black;">  Crear Días Feriados</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-person-plus" href="#" onclick="changeView2(\'crearEmpleado\')" style="color: black;"> Crear Empleado</a>
+              <a class="nav-link bi bi-person-plus" href="#" onclick="changeView2(\'crearEmpleado\')" style="color: black;">  Crear Empleado</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-envelope" href="#" onclick="changeView2(\'aprovacionJustificacion\')" style="color: black;"> Aprobación de Ausencias</a>
+              <a class="nav-link bi bi-sticky icon" href="#" onclick="changeView2(\'aprovacionJustificacion\')" style="color: black;">  Aprobación de Ausencias</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-airplane bi bi-calendar-check" href="#" onclick="changeView2(\'aprovacionVacaciones\')" style="color: black;"> Aprobación de Vacaciones</a>
+              <a class="nav-link bi bi-airplane bi bi-calendar-check" href="#" onclick="changeView2(\'aprovacionVacaciones\')" style="color: black;">  Aprobación de Vacaciones</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroTardia\')" style="color: black;"> Registro de Tardía</a>
+              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroTardia\')" style="color: black;">  Registro de Tardía</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroAusentismo\')" style="color: black;"> Registro de Ausencia</a>
+              <a class="nav-link bi bi-clock-history" href="#" onclick="changeView2(\'registroAusentismo\')" style="color: black;">  Registro de Ausencia</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'editUser\')" style="color: black;"> Modificar Usuario</a>
+              <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'editUser\')" style="color: black;">  Modificar Usuario</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'justificacionAusencia\')" style="color: black;"> Justificación Ausencia</a>
+              <a class="nav-link bi  bi-sticky icon" href="#" onclick="changeView2(\'justificacionAusencia\')" style="color: black;">  Justificación de Ausencia</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;"> Puestos de la Empresa</a>
+              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;">  Puestos de trabajo</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'marca\')" style="color: black;"> Marcas </a>
+              <a class="nav-link bi bi-check-circle icon" href="#" onclick="changeView2(\'marca\')" style="color: black;">  Marcas </a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'HorasEncargado\')" style="color: black;"> Horas Extra</a>
+              <a class="nav-link bi bi-hourglass-split icon" href="#" onclick="changeView2(\'HorasEncargado\')" style="color: black;">  Horas Extra</a>
             </li>
             <br>
             <br>
             <br>
             <br>
             <li class="nav-item1">
-              <a class="nav-link bi bi-box-arrow-right" href="viewsEncargados/logoutAdmin.php" onclick="" style="color: black;"> Cerrar sesión</a>
+              <a class="nav-link bi bi-box-arrow-right" href="viewsEncargados/logoutAdmin.php" onclick="" style="color: black;">  Cerrar sesión</a>
             </li>
           ';
       } else {

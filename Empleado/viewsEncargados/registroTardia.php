@@ -108,11 +108,11 @@ $horario = consultarHorario();
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>idHorario</th>
+            <th>ID Horario</th>
             <th>hora de inicio</th>
             <th>hora de salida</th>
             <th>fecha de tardia</th>
-            <th>idEmpleado</th>
+            <th>ID Empleado</th>
           </tr>
         </thead>
         <tbody>

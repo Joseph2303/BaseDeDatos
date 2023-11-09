@@ -164,7 +164,7 @@ $empleados = consultarEmpleados(); ?>
             <label>Username del Empleado</label>
             <input name="username" type="text" class="form-control" placeholder="Username" required>
           </div>
-          <input type="submit" name="save" class="btn btn-success" value="Guardar">
+          <input type="submit" name="save" class="btn btn-info" value="Guardar">
         </form>
       </div>
     </div>

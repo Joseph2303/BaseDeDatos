@@ -97,6 +97,8 @@ $registroA = consultarRegistroAusentismo();
         <div class="col-md-3">
             <!---->
         </div>
+        <h1 class="text-center">Registro de Ausencia</h1>
+        <br>
         <div class="col-md-9">
             <form method="POST" action="registroAusentismo/find.php">
                 <button class="btn btn-info" type="submit" name="">Buscar </button>

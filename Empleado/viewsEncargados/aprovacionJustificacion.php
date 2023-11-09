@@ -104,7 +104,7 @@ $justificacion = consultarJustificacion(); ?>
     <div class="row">
       <div class="search-form col-10">
         <!-- MESSAGES -->
-        <h1 class="text-center">Aprobación de justificación</h1>
+        <h1 class="text-center">Aprobación de Ausencias</h1>
         <?php if (isset($_SESSION['message'])) { ?>
         <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
           <?= htmlspecialchars($_SESSION['message']) ?>

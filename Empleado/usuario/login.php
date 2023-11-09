@@ -48,7 +48,17 @@ if (isset($_POST['login'])) {
 
       if ($userdata) {
         $_SESSION['userdata'] =  $userdata;
-    
+        
+        $idUsuario = $userdata['idUsuario'];
+
+        $userdataQuery = "SELECT * FROM empleado WHERE idUsuario = :idUsuario";
+        $stmt = $conn->prepare($userdataQuery);
+        $stmt->bindParam(':idUsuario', $idUsuario, PDO::PARAM_STR);
+        $stmt->execute();
+        $empleado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['empleadoData'] = $empleado;
+        
+        var_dump($_SESSION['empleadoData']);
         var_dump($_SESSION['userdata']);
         $_SESSION['message'] = '¡Inicio de sesión exitoso! Bienvenido, '.$usuario['tipoUsuario'].': ' . $username. '.';
         header('Location: ../includ/proted.php');

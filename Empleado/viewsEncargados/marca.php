@@ -93,8 +93,10 @@ $marcas = consultarMarca();
     <div class="row">
 
         <div class="col-md-3">
-            <!---->
+            
         </div>
+        <h1 class="text-center">Marca</h1>
+
         <div class="col-md-9">
             <form method="POST" action="marcas/find.php">
                 <button class="btn btn-info" type="submit" name="">Buscar </button>
