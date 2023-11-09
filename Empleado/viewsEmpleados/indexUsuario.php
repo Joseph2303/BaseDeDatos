@@ -131,12 +131,14 @@ include("../db.php");
           </tr>
         </thead>
         <tbody>
-          <?php
+         
+         <?php
           $query = "SELECT * FROM usuario";
           $result_usuario = mysqli_query($conn, $query);
 
           while ($row = mysqli_fetch_assoc($result_usuario)) {
             ?>
+            
             <tr>
               <td><?php echo htmlspecialchars($row['username']); ?></td>
               <td><?php echo htmlspecialchars($row['contrasena']); ?></td>

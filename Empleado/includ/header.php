@@ -326,17 +326,39 @@
 </script>
 
 <script>
-    function mostrarFormulario(checkbox) {
-      var formulario = document.getElementById("formulario");
-      if (checkbox.checked) {
-        formulario.style.display = "block";
-      } else {
-        formulario.style.display = "none";
-      }
+  function mostrarFormulario(checkbox) {
+    var formulario = document.getElementById("formulario");
+    if (checkbox.checked) {
+      formulario.style.display = "block";
+
+      var fechaActual = new Date();
+      var dia = fechaActual.getDate();
+      var mes = fechaActual.getMonth() + 1;
+      var año = fechaActual.getFullYear();
+
+      var fila = checkbox.parentNode.parentNode;
+      var idJustificacionAusencia = fila.getAttribute("data-id");
+      var fechaSolicitud = fila.children[1].textContent;
+      var fechaAusencia = fila.children[2].textContent;
+      var archivos = fila.children[3].textContent;
+      var justificacion = fila.children[4].textContent;
+
+      var fechaFormateada = año + '-' + (mes < 10 ? '0' + mes : mes) + '-' + (dia < 10 ? '0' + dia : dia);
+
+      document.getElementById("idJustificacionAusencia").value = idJustificacionAusencia;
+      document.getElementById("fechaSolicitud").value = fechaFormateada;
+      document.getElementById("fechaAusencia").value = fechaAusencia;
+      document.getElementById("archivos").value = archivos;
+      document.getElementById("justificacion").value = justificacion;
+
+    } else {
+      formulario.style.display = "none";
     }
-  </script>
-  
-  <script>
+  }
+</script>
+
+
+<script>
   document.getElementById('foto').addEventListener('change', function(e) {
     var reader = new FileReader();
     reader.onload = function(e) {
@@ -345,6 +367,73 @@
     };
     reader.readAsDataURL(this.files[0]);
   });
+
+
+
+
+
+
+
+
+
+
+  function mostrarPopup() {
+    document.getElementById('popup').style.display = 'flex';
+}
+
+function cerrarPopup() {
+    document.getElementById('popup').style.display = 'none';
+}
+
+function eliminarFila(btn) {
+    var row = btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+
+function actualizarFila(btn) {
+    var row = btn.parentNode.parentNode;
+    var cells = row.getElementsByTagName("td");
+
+    var fechaSolicitud = cells[0].textContent;
+    var fechaAusencia = cells[1].textContent;
+    var archivos = cells[2].textContent;
+    var justificacion = cells[3].textContent;
+
+    var formHTML = `
+        <td><input type="date" value="${fechaSolicitud}"></td>
+        <td><input type="date" value="${fechaAusencia}"></td>
+        <td><input type="text" value="${archivos}"></td>
+        <td><input type="text" value="${justificacion}"></td>
+        <td>
+            <button onclick="guardarCambios(this)">Guardar</button>
+            <br><br>
+            <button onclick="cancelarActualizacion(this)">Cancelar</button>
+        </td>
+    `;
+
+    row.innerHTML = formHTML;
+}
+
+
+function guardarCambios(btn) {
+    var row = btn.parentNode.parentNode;
+    var cells = row.getElementsByTagName("td");
+    
+    var fechaSolicitud = cells[0].querySelector("input").value;
+    var fechaAusencia = cells[1].querySelector("input").value;
+    var archivos = cells[2].querySelector("input").value;
+    var justificacion = cells[3].querySelector("input").value;
+    
+    cells[0].innerHTML = fechaSolicitud;
+    cells[1].innerHTML = fechaAusencia;
+    cells[2].innerHTML = archivos;
+    cells[3].innerHTML = justificacion;
+    
+    var accionesCell = row.querySelector("td:last-child");
+    accionesCell.innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button> ' +
+                             '<button onclick="actualizarFila(this)">Actualizar</button>';
+}
+
 </script>
 
 </html>

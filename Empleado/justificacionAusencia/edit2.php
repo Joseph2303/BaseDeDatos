@@ -22,10 +22,6 @@ if (isset($_GET['idJustificacionAusencia'])) {
     $fechaSolicitud = $row['fechaSolicitud'];
     $fechaAusencia = $row['fechaAusencia'];
     $justificacion = $row['justificacion'];
-    $estado = $row['estado'];
-    $NombreEncargado = $row['NombreEncargado'];
-    $descripcion = $row['descripcion'];
-    $idEmpleado = $row['idEmpleado'];
   }
 }
 
@@ -34,22 +30,15 @@ if (isset($_POST['update'])) {
     $fechaSolicitud = $_POST['fechaSolicitud'];
     $fechaAusencia = $_POST['fechaAusencia'];
     $justificacion = $_POST['justificacion'];
-    $estado = $_POST['estado'];
-    $NombreEncargado = $_POST['NombreEncargado'];
-    $descripcion = $_POST['descripcion'];
-    $idEmpleado = $_POST['idEmpleado'];
 
 
-    $query = "EXEC paActualizarJustificacionAusencia @idJustificacionAusencia=?, @nuevaFechaSolicitud=?, @nuevaFechaAusencia=?, @nuevaJustificacion=?, @nuevoEstado=?, @nuevoNombreEncargado=?, @nuevaDescripcion=?, @nuevoIdEmpleado=?";
+
+    $query = "EXEC paActualizarJustificacionAusenciaEmpleado @idJustificacionAusencia=?, @nuevaFechaSolicitud=?, @nuevaFechaAusencia=?, @nuevaJustificacion=?";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $idJustificacionAusencia, PDO::PARAM_INT);
     $stmt->bindParam(2, $fechaSolicitud, PDO::PARAM_STR);
     $stmt->bindParam(3, $fechaAusencia, PDO::PARAM_STR);
     $stmt->bindParam(4, $justificacion, PDO::PARAM_STR);
-    $stmt->bindParam(5, $estado, PDO::PARAM_STR);
-    $stmt->bindParam(6, $NombreEncargado, PDO::PARAM_STR);
-    $stmt->bindParam(7, $descripcion, PDO::PARAM_STR);
-    $stmt->bindParam(8, $idEmpleado, PDO::PARAM_INT);
     $stmt->execute();
 
   $_SESSION['message'] = 'Justificación de Ausencia actualizada exitosamente';

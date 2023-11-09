@@ -186,6 +186,43 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     input[type="submit"]:hover {
       background-color: #45a049;
     }
+
+
+
+
+    .button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+}
+
+.popup-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
   </style>
 
 </head>
@@ -205,34 +242,78 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         <th>Archivos</th>
         <th>Justificacion</th>
         <th>Estado</th>
+        <th>Descripcion</th>
+        <th>Nombre del encargado</th>
         <th>Seleccionar</th>
       </tr>
       </thead>
       <tbody>
         <?php foreach ($justificacionAusencia as $row) { ?>
-          <tr>
+          <tr data-id="<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>">
             <td><?php echo htmlspecialchars($row['idJustificacionAusencia']); ?></td>
             <td><?php echo htmlspecialchars($row['fechaSolicitud']); ?></td>
             <td><?php echo htmlspecialchars($row['fechaAusencia']); ?></td>
             <td><?php echo htmlspecialchars($row['archivos']); ?></td>
             <td><?php echo htmlspecialchars($row['justificacion']); ?></td>
             <td><?php echo htmlspecialchars($row['estado']); ?></td>
+            <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+            <td><?php echo htmlspecialchars($row['NombreEncargado']); ?></td>
             <td><input type="checkbox" onchange="mostrarFormulario(this)"></td>
           </tr>
         <?php } ?>
       </tbody>
 
     </table>
+    <br>
 
-    <form id="formulario" action="../justificacionAusencia/edit.php" method="POST" enctype="multipart/form-data" style="display: none;">
+    <!--<button onclick="mostrarPopup()">Solicitudes Enviadas</button>-->
+
+
+    <div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="popup-cerrar" onclick="cerrarPopup()">&times;</span>
+        <h2>Tabla de Datos</h2>
+        <table id="tablaDatos">
+            <thead>
+                <tr>
+                    <th>Fecha de Solicitud</th>
+                    <th>Fecha de Ausencia</th>
+                    <th>Archivos</th>
+                    <th>Justificación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se llenará la tabla con datos dinámicamente -->
+                <tr>
+                <td>Fecha 1</td>
+                    <td>Fecha 2</td>
+                    <td>Archivo 1</td>
+                    <td>Justificación 1</td>
+                    <td>
+                        <button onclick="eliminarFila(this)">Eliminar</button>
+                        <button onclick="actualizarFila(this)">Actualizar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+    <br><br>
+    <br><br>
+
+    <form id="formulario" action="justificacionAusencia/edit2.php" method="POST" enctype="multipart/form-data" style="display: none;">
+      <h3>Formulario</h3>
 
       <input type="hidden" id="idJustificacionAusencia" name="idJustificacionAusencia" value="<?php echo $idJustificacionAusencia; ?>">
 
       <label for="fechaSolicitud">Fecha de solicitud:</label>
-      <input type="text" id="fechaSolicitud" name="fechaSolicitud" value="<?php echo $fechaSolicitud; ?>" readonly><br><br>
+      <input type="text" id="fechaSolicitud" name="fechaSolicitud" readonly><br><br>
 
       <label for="fechaAusencia">Fecha de ausencia:</label>
-      <input type="text" id="fechaAusencia" name="fechaAusencia" value="<?php echo $fechaAusencia; ?>"><br><br>
+      <input type="text" id="fechaAusencia" name="fechaAusencia" value="<?php echo $fechaAusencia; ?>" readonly><br><br>
 
       <label for="archivos">Archivos:</label>
       <input type="file" id="archivos" name="archivos"><br><br>
@@ -240,20 +321,9 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
       <label for="justificacion">Justificación:</label>
       <textarea id="justificacion" name="justificacion" rows="4" cols="50"><?php echo $justificacion; ?></textarea><br><br>
 
-      <label for="estado">Estado:</label>
-      <input type="text" id="estado" name="estado" value="<?php echo $estado; ?>" readonly><br><br>
-
-      <label for="descripcion">Descripción:</label>
-      <input type="text" id="descripcion" name="descripcion" value="<?php echo $descripcion; ?>" readonly><br><br>
-
-      <label for="NombreEncargado">Nombre del encargado:</label>
-      <input type="text" id="NombreEncargado" name="NombreEncargado" value="<?php echo $NombreEncargado; ?>" readonly><br><br>
-
       <input type="submit" value="Enviar" name="update">
     </form>
-
   </main>
 
 </body>
-
 </html>
