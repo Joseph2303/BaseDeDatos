@@ -52,14 +52,14 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     table {
       border-collapse: collapse;
       width: 100%;
-      max-width: 650px;
-      /* Ajusta este valor según tus necesidades */
+      max-width: 950px;
+      
     }
 
     th,
     td {
       padding: 8px;
-      text-align: left;
+      text-align: center;
     }
 
     th {
@@ -108,7 +108,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     }
   </style>
   <style>
-    /* Estilos para el formulario */
+
     #formulario {
       max-width: 500px;
       margin: 0 auto;
@@ -116,7 +116,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
       border-radius: 10px;
     }
 
-    /* Estilos para las etiquetas y textarea */
+
     label,
     textarea {
       display: block;
@@ -130,7 +130,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
       border-radius: 5px;
     }
 
-    /* Estilos para el botón de enviar */
+   
     input[type="submit"] {
       padding: 10px 20px;
       background-color: #ADF678;
@@ -224,6 +224,8 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
 }
 
   </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 </head>
 
@@ -233,16 +235,21 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     <div class="justificacion">
       <h1>Justificación de Ausencia</h1>
     </div>
+    <br>
+    <div>
+    <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar justificación...">
+    </div>
+    <br>
     <table id="tabla">
       </thead>
       <tr>
-        <th>ID justificacion</th>
+        <th>ID justificación</th>
         <th>Fecha de solicitud</th>
         <th>Fecha de Ausencia</th>
         <th>Archivos</th>
-        <th>Justificacion</th>
+        <th>Justificación</th>
         <th>Estado</th>
-        <th>Descripcion</th>
+        <th>Descripción</th>
         <th>Nombre del encargado</th>
         <th>Seleccionar</th>
       </tr>
@@ -251,8 +258,8 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         <?php foreach ($justificacionAusencia as $row) { ?>
           <tr data-id="<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>">
             <td><?php echo htmlspecialchars($row['idJustificacionAusencia']); ?></td>
-            <td><?php echo htmlspecialchars($row['fechaSolicitud']); ?></td>
-            <td><?php echo htmlspecialchars($row['fechaAusencia']); ?></td>
+            <td><?php echo htmlspecialchars(date('Y-m-d', strtotime($row['fechaSolicitud']))); ?></td>
+            <td><?php echo htmlspecialchars(date('Y-m-d', strtotime($row['fechaAusencia']))); ?></td>
             <td><?php echo htmlspecialchars($row['archivos']); ?></td>
             <td><?php echo htmlspecialchars($row['justificacion']); ?></td>
             <td><?php echo htmlspecialchars($row['estado']); ?></td>
@@ -262,11 +269,10 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
           </tr>
         <?php } ?>
       </tbody>
-
     </table>
     <br>
 
-    <!--<button onclick="mostrarPopup()">Solicitudes Enviadas</button>-->
+    <!--<button onclick="mostrarPopup()">Solicitudes Enviadas</button-->
 
 
     <div id="popup" class="popup">
@@ -310,10 +316,10 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
       <input type="hidden" id="idJustificacionAusencia" name="idJustificacionAusencia" value="<?php echo $idJustificacionAusencia; ?>">
 
       <label for="fechaSolicitud">Fecha de solicitud:</label>
-      <input type="text" id="fechaSolicitud" name="fechaSolicitud" readonly><br><br>
+      <input type="date" id="fechaSolicitud" name="fechaSolicitud" readonly><br><br>
 
       <label for="fechaAusencia">Fecha de ausencia:</label>
-      <input type="text" id="fechaAusencia" name="fechaAusencia" value="<?php echo $fechaAusencia; ?>" readonly><br><br>
+      <input type="date" id="fechaAusencia" name="fechaAusencia" value="<?php echo $fechaAusencia; ?>" readonly><br><br>
 
       <label for="archivos">Archivos:</label>
       <input type="file" id="archivos" name="archivos"><br><br>
@@ -326,4 +332,5 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
   </main>
 
 </body>
+
 </html>

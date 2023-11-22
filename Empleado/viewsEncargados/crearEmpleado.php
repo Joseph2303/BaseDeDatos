@@ -5,16 +5,17 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 include('../includ/proted.php');
 
 
-function consultarEmpleados() {
+function consultarEmpleados()
+{
   $query = "SELECT * FROM empleado ORDER BY idEmpleado DESC";
 
   try {
-      $stmt = $GLOBALS['conn']->query($query);
-      $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $rows;
+    $stmt = $GLOBALS['conn']->query($query);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
   } catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
-      return [];
+    echo "Error: " . $e->getMessage();
+    return [];
   }
 }
 
@@ -38,14 +39,13 @@ $empleados = consultarEmpleados(); ?>
   table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px;
-    /* Ajusta este valor según tus necesidades */
+    max-width: 950px;
   }
 
   th,
   td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
   }
 
   th {
@@ -96,9 +96,11 @@ $empleados = consultarEmpleados(); ?>
   }
 </style>
 <main class="container p-4 col-10">
+  <h1 class="text-center">Crear Empleado</h1>
+  <br>
   <div class="row">
     <div class="col-3">
-    <h1 class="text-center">Crear Empleado</h1>
+
       <!-- MESSAGES -->
       <?php if (isset($_SESSION['message'])) { ?>
         <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
@@ -143,38 +145,50 @@ $empleados = consultarEmpleados(); ?>
             <label>Fecha de contratación</label>
             <input name="fechContrat" type="date" class="form-control" required>
           </div>
-           <div class="form-group">
-              <label for="puesto">Puesto del Empleado</label>
-                  <select name="idPuesto" class="form-control" required>
-                      <option value="">Seleccione el puesto</option>
-                      <?php
-                      $query = "SELECT idPuesto, puesto FROM puesto"; 
-                      $stmt = $GLOBALS['conn']->query($query);
-                      $puestos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+          <div class="form-group">
+            <label for="puesto">Puesto del Empleado</label>
+            <select name="idPuesto" class="form-control" required>
+              <option value="">Seleccione el puesto</option>
+              <?php
+              $query = "SELECT idPuesto, puesto FROM puesto";
+              $stmt = $GLOBALS['conn']->query($query);
+              $puestos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                      foreach ($puestos as $puesto) {
-                          echo "<option value='" . htmlspecialchars($puesto['idPuesto']) . "'> Puesto: " . htmlspecialchars($puesto['puesto']) . " - ID: " . htmlspecialchars($puesto['idPuesto']) . "</option>";
-                      }
-                      ?>
-                  </select>
-            </div>
+              foreach ($puestos as $puesto) {
+                echo "<option value='" . htmlspecialchars($puesto['idPuesto']) . "'> Puesto: " . htmlspecialchars($puesto['puesto']) . " - ID: " . htmlspecialchars($puesto['idPuesto']) . "</option>";
+              }
+              ?>
+            </select>
+          </div>
 
 
           <div class="form-group">
-            <label>Username del Empleado</label>
-            <input name="username" type="text" class="form-control" placeholder="Username" required>
+            <label>Usuario del Empleado</label>
+            <select name="idUsuario" class="form-control" required>
+              <option value="">Seleccione el Usuario</option>
+              <?php
+              $query = "SELECT idUsuario, username FROM usuario";
+              $stmt = $GLOBALS['conn']->query($query);
+              $puestos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+              foreach ($puestos as $puesto) {
+                echo "<option value='" . htmlspecialchars($puesto['idUsuario']) . "'> Usuario: " . htmlspecialchars($puesto['username']) . " - ID: " . htmlspecialchars($puesto['idUsuario']) . "</option>";
+              }
+              ?>
+            </select>
           </div>
+
+
           <input type="submit" name="save" class="btn btn-info" value="Guardar">
         </form>
       </div>
     </div>
     <div class="col-md-3">
-      <!-- Formulario para buscar empleado -->
-      <form action="empleado/save.php" method="POST">
-        <button class="btn btn-info" style="margin-top: 2.5rem;" type="submit" name="buscar">Buscar</button>
-      </form>
-
-      <table class="table table-bordered" >
+      <div>
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar empleado...">
+      </div>
+      <br>
+      <table id="tabla" class="table table-bordered">
         <thead>
           <tr>
             <th>ID Empleado</th>
@@ -185,35 +199,35 @@ $empleados = consultarEmpleados(); ?>
             <th>Fecha de contratación</th>
             <th>Username</th>
             <th>Puesto</th>
-            <th>Action</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
-        <?php foreach ($empleados as $row) { ?>
+          <?php foreach ($empleados as $row) { ?>
             <tr>
-                <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
-                <td><?php echo htmlspecialchars($row['nombre']); ?></td>
-                <td><?php echo htmlspecialchars($row['apellido1']); ?></td>
-                <td><?php echo htmlspecialchars($row['apellido2']); ?></td>
-                <td><?php echo htmlspecialchars($row['email']); ?></td>
-                <td><?php echo htmlspecialchars($row['fechContrat']); ?></td>
-                <td><?php echo htmlspecialchars($row['idUsuario']); ?></td>
-                <td><?php echo htmlspecialchars($row['idPuesto']); ?></td> 
-                <td>
-                    <a href="empleado/edit.php?idEmpleado=<?php echo htmlspecialchars($row['idEmpleado']); ?>" class="btn btn-info">
-                        <i class="fas fa-marker"></i>
-                    </a>
-                    <a href="empleado/delete.php?idEmpleado=<?php echo htmlspecialchars($row['idEmpleado']); ?>" class="btn btn-danger" onclick="return confirmarEliminacion()">
-                        <i class="bi bi-trash"></i>
-                    </a>
+              <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
+              <td><?php echo htmlspecialchars($row['nombre']); ?></td>
+              <td><?php echo htmlspecialchars($row['apellido1']); ?></td>
+              <td><?php echo htmlspecialchars($row['apellido2']); ?></td>
+              <td><?php echo htmlspecialchars($row['email']); ?></td>
+              <td><?php echo htmlspecialchars($row['fechContrat']); ?></td>
+              <td><?php echo htmlspecialchars($row['idUsuario']); ?></td>
+              <td><?php echo htmlspecialchars($row['idPuesto']); ?></td>
+              <td>
+                <a href="empleado/edit.php?idEmpleado=<?php echo htmlspecialchars($row['idEmpleado']); ?>" class="btn btn-info">
+                  <i class="fas fa-marker"></i>
+                </a>
+                <a href="empleado/delete.php?idEmpleado=<?php echo htmlspecialchars($row['idEmpleado']); ?>" class="btn btn-danger" onclick="return confirmarEliminacion()">
+                  <i class="bi bi-trash"></i>
+                </a>
 
 
-                </td>
+              </td>
             </tr>
-        <?php } ?>
+          <?php } ?>
 
-    </tbody>
-    
+        </tbody>
+
       </table>
     </div>
   </div>

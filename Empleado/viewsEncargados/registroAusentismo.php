@@ -1,18 +1,26 @@
+<?php
+include("../db.php");
 
-<?php 
-include("../db.php"); 
+function consultarRegistroAusentismo()
+{
+  $registros_por_pagina = 10;
+  $pagina = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? $_GET['pagina'] : 1;
+  $inicio_desde = ($pagina - 1) * $registros_por_pagina;
 
-function consultarRegistroAusentismo() {
-    $query = "SELECT * FROM registroAusentismo ORDER BY idRegistroAusentismo DESC";
+  $query = "SELECT * FROM (
+      SELECT *, ROW_NUMBER() OVER (ORDER BY idRegistroAusentismo DESC) as row 
+      FROM registroAusentismo
+  ) a WHERE row > $inicio_desde AND row <= " . ($inicio_desde + $registros_por_pagina);
 
-    try {
-        $stmt = $GLOBALS['conn']->query($query);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $rows;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return [];
-    }
+
+  try {
+    $stmt = $GLOBALS['conn']->query($query);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+  } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    return [];
+  }
 }
 
 $registroA = consultarRegistroAusentismo();
@@ -20,11 +28,11 @@ $registroA = consultarRegistroAusentismo();
 
 <br>
 <style>
-    .container {
-      margin-left: 22%;
-      margin-right: 22%;
-      margin-top: 1%;
-    }
+  .container {
+    margin-left: 22%;
+    margin-right: 22%;
+    margin-top: 1%;
+  }
 
   .alert {
     margin-bottom: 10px;
@@ -35,15 +43,16 @@ $registroA = consultarRegistroAusentismo();
   }
 
   table {
+    max-width: 950px;
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px; 
+    margin: 0 auto;
   }
 
   th,
   td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
   }
 
   th {
@@ -92,37 +101,58 @@ $registroA = consultarRegistroAusentismo();
   }
 </style>
 <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9)">
-    <div class="row">
+  <div>
 
-        <div class="col-md-3">
-            <!---->
-        </div>
-        <h1 class="text-center">Registro de Ausencia</h1>
-        <br>
-        <div class="col-md-9">
-            <form method="POST" action="registroAusentismo/find.php">
-                <button class="btn btn-info" type="submit" name="">Buscar </button>
-            </form>
-            <table class="table table-bordered">
-              <thead>
-                  <tr>
-                      <th>ID Registro Ausentismo</th>
-                      <th>Fecha</th>
-                      <th>ID Horario</th>
-                      <th>ID Empleado</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <?php foreach ($registroA as $row) { ?>
-                      <tr>
-                          <td><?php echo htmlspecialchars($row['idRegistroAusentismo']); ?></td>
-                          <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-                          <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
-                          <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
-                      </tr>
-                  <?php } ?>
-              </tbody>
-          </table>
-        </div>
+    <h1 class="text-center">Registro de Ausencia</h1>
+    <br>
+    <h3>Buscar</h3>
+    <div>
+      <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar registro...">
     </div>
+    <br>
+
+    <table id="tabla" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID Registro Ausentismo</th>
+          <th>Fecha</th>
+          <th>ID Horario</th>
+          <th>ID Empleado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+
+        foreach ($registroA as $row) {
+
+        ?>
+          <tr class="fila-paginacion">
+            <td><?php echo htmlspecialchars($row['idRegistroAusentismo']); ?></td>
+            <td><?php echo htmlspecialchars($row['fecha']); ?></td>
+            <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
+            <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
+          </tr>
+
+
+
+        <?php }
+        ?>
+      </tbody>
+    </table>
+    <?php
+    $registros_por_pagina = 10;
+    $sql = "SELECT COUNT(*) AS total FROM registroAusentismo";
+    $resultado = $conn->query($sql);
+    $fila = $resultado->fetch(PDO::FETCH_ASSOC);
+    $total_registros = $fila['total'];
+
+    $total_paginas = ceil($total_registros / $registros_por_pagina);
+
+    echo "<div class='pagination'>";
+    for ($i = 1; $i <= $total_paginas; $i++) {
+      echo "<a href='viewsEncargados/registroAusentismo.php?pagina=" . $i . "'>" . $i . "</a> ";
+    }
+    echo "</div>";
+    ?>
+  </div>
 </main>

@@ -40,7 +40,7 @@ $horasExtra = consultaExtrasEn();
   table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px;
+    max-width: 950px;
   }
 
   th,
@@ -95,20 +95,18 @@ $horasExtra = consultaExtrasEn();
   }
 </style>
 <<main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9) ;">
-  <div class="row">
-    <div class="col-md-10">
-      <!---->
-    </div>
-    <div class="col-md-10">
-      <h1 class="text-center">Horas Extra</h1>
-      <form method="POST" action="horasExtra/find.php">
-        <button class="btn btn-info" type="submit" name="">Buscar </button>
-      </form>
 
-      <table class="table table-bordered">
+  <div>
+      <h1 class="text-center">Horas Extra</h1>
+      <br>
+      <div>
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar hora extra...">
+      </div>
+      <br>
+      <table id="tabla" class="table table-bordered">
         <thead>
           <tr>
-            <th>ID horas extras</th>
+            <th>ID Horas extras</th>
             <th>Total de horas</th>
             <th>Cantidad de extras </th>
             <th>ID horario</th>
@@ -125,6 +123,5 @@ $horasExtra = consultaExtrasEn();
           <?php } ?>
         </tbody>
       </table>
-    </div>
   </div>
-</main>
+  </main>

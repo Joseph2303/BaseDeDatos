@@ -21,11 +21,11 @@
   button {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid #fff; /* Cambiado de #000 a #fff */
+    border-bottom: 1px solid #fff; 
     outline: none;
     padding: 5px;
     margin-bottom: 10px;
-    color: #fff; /* Cambiado de #000 a #fff */
+    color: #fff; 
     transition: border-color 0.3s;
   }
 
@@ -46,8 +46,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: white; /* o cualquier otro color de fondo que prefieras */
-            z-index: 9999; /* para que aparezca por encima de todo lo demás */
+            background-color: white; 
+            z-index: 9999; 
         }
 
 </style>

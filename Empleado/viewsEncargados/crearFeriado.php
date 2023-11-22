@@ -48,7 +48,7 @@ $feriados = consultarDiasFeriados();
     th,
     td {
         padding: 8px;
-        text-align: left;
+        text-align: center;
     }
 
     th {
@@ -98,11 +98,10 @@ $feriados = consultarDiasFeriados();
 </style>
 
 <main class="container p-4 col-8">
-
+    <h1 class="text-center">Días Feriados</h1>
+    <br>
     <div class="row">
         <div class="col-4">
-            <h1 class="text-center">Dias Feriados</h1>
-            <!-- MESSAGES -->
             <?php if (isset($_SESSION['message'])) { ?>
                 <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
                     <?= htmlspecialchars($_SESSION['message']) ?>
@@ -136,20 +135,23 @@ $feriados = consultarDiasFeriados();
 
                     <input class="btn btn-info btn-block" type="submit" name="save" value="Guardar">
                 </form>
+
             </div>
         </div>
 
         <div class="col-md-8">
-            <form method="POST" action="diasFeriados/find.php">
-                <button class="btn btn-info " style="margin-top: 2.5rem;" type="submit" name="">Buscar</button>
-            </form>
-            <table class="table table-bordered">
+            <div>
+                <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar día feriado...">
+            </div>
+            <br>
+            <table id="tabla" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>id Dia Feriado</th>
+                        <th>ID Día Feriado</th>
                         <th>Fecha</th>
                         <th>Descripción</th>
                         <th>Tipo de Feriado (Pago)</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -161,8 +163,56 @@ $feriados = consultarDiasFeriados();
                             <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
                         </tr>
                     <?php } ?>
+                    <tr>
+                        <td>Fecha 1</td>
+                        <td>Fecha 2</td>
+                        <td>Archivo 1</td>
+                        <td>Justificación 1</td>
+                        <td>
+                            <input type="checkbox" onchange="mostrarbotones(this)">
+                        </td>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
+            <div id="modal" style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+            ">
+                <div style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                
+                ">
+                    <span style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+                    " onclick="cerrarModal()">&times;</span>
+                    <form id="formularioModificar" action="diasFeriados/save.php" method="POST" style="display: none;">
+                       
+                        <input type="submit" class="btn btn-info btn-block" name="save" value="Guardar">
+                    </form>
+                </div>
+            </div>
+            
+            <div class="botones" style="display: none;">
+                <button class="btn btn-primary btn-sm" onclick="mostrarFormulario(this)">Modificar</button>
+                <button class="btn btn-danger btn-sm" onclick="eliminar()">Eliminar</button>
+            </div>
         </div>
     </div>
 </main>

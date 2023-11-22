@@ -1,17 +1,18 @@
-<?php 
-include("../db.php"); 
+<?php
+include("../db.php");
 
-function consultarMarca() {
-    $query = "SELECT * FROM marca ORDER BY idMarca DESC";
+function consultarMarca()
+{
+  $query = "SELECT * FROM marca ORDER BY idMarca DESC";
 
-    try {
-        $stmt = $GLOBALS['conn']->query($query);
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $rows;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return [];
-    }
+  try {
+    $stmt = $GLOBALS['conn']->query($query);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+  } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+    return [];
+  }
 }
 
 $marcas = consultarMarca();
@@ -30,7 +31,7 @@ $marcas = consultarMarca();
   table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px; 
+    max-width: 950px;
   }
 
   th,
@@ -83,44 +84,47 @@ $marcas = consultarMarca();
     display: table;
     clear: both;
   }
+
   .container {
-      margin-left: 22%;
-      margin-right: 22%;
-      margin-top: 1%;
-    }
+    margin-left: 22%;
+    margin-right: 22%;
+    margin-top: 1%;
+  }
 </style>
 <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9)">
-    <div class="row">
+  <div>
 
-        <div class="col-md-3">
-            
-        </div>
-        <h1 class="text-center">Marca</h1>
+    <div class="col-md-3">
 
-        <div class="col-md-9">
-            <form method="POST" action="marcas/find.php">
-                <button class="btn btn-info" type="submit" name="">Buscar </button>
-            </form>
-            <table class="table table-bordered">
-              <thead>
-                  <tr>
-                      <th>ID Marca</th>
-                      <th>Fecha</th>
-                      <th>Tipo</th>
-                      <th>ID Horario</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <?php foreach ($marcas as $row) { ?>
-                      <tr>
-                          <td><?php echo htmlspecialchars($row['idMarca']); ?></td>
-                          <td><?php echo htmlspecialchars($row['fechaHora']); ?></td>
-                          <td><?php echo htmlspecialchars($row['tipo']); ?></td>
-                          <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
-                      </tr>
-                  <?php } ?>
-              </tbody>
-          </table>
-        </div>
     </div>
+    <h1 class="text-center">Marca</h1>
+
+    <div >
+      <br>
+      <div>
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar hora extra...">
+      </div>
+      <br>
+      <table id="tabla" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID Marca</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>ID Horario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($marcas as $row) { ?>
+            <tr>
+              <td><?php echo htmlspecialchars($row['idMarca']); ?></td>
+              <td><?php echo htmlspecialchars($row['fechaHora']); ?></td>
+              <td><?php echo htmlspecialchars($row['tipo']); ?></td>
+              <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </main>

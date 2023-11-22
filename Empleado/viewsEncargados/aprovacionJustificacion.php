@@ -4,16 +4,17 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 }
 include('../includ/proted.php');
 
-function consultarJustificacion() {
+function consultarJustificacion()
+{
   $query = "SELECT * FROM justificacionAusencia ORDER BY idJustificacionAusencia DESC";
 
   try {
-      $stmt = $GLOBALS['conn']->query($query);
-      $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $rows;
+    $stmt = $GLOBALS['conn']->query($query);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
   } catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
-      return [];
+    echo "Error: " . $e->getMessage();
+    return [];
   }
 }
 
@@ -22,13 +23,12 @@ $justificacion = consultarJustificacion(); ?>
 <html>
 
 <head>
-  <style>  
-  
-  .container {
-    margin-left: 22%;
-    margin-right: 22%;
-    margin-top: 1%;
-    background-color: rgba(255, 255, 255, 0.9);
+  <style>
+    .container {
+      margin-left: 22%;
+      margin-right: 22%;
+      margin-top: 1%;
+      background-color: rgba(255, 255, 255, 0.9);
     }
 
     .alert {
@@ -40,15 +40,16 @@ $justificacion = consultarJustificacion(); ?>
     }
 
     table {
-      
+
       border-collapse: collapse;
       width: 100%;
+      max-width: 950px;
     }
 
     th,
     td {
       padding: 8px;
-      text-align: left;
+      text-align: center;
     }
 
     th {
@@ -101,45 +102,45 @@ $justificacion = consultarJustificacion(); ?>
 <body>
 
   <main class="container p-4 col-9">
-    <div class="row">
-      <div class="search-form col-10">
-        <!-- MESSAGES -->
-        <h1 class="text-center">Aprobación de Ausencias</h1>
-        <?php if (isset($_SESSION['message'])) { ?>
+    <div class="search-form col-10">
+      <!-- MESSAGES -->
+      <h1 class="text-center">Aprobación de Ausencias</h1>
+      <?php if (isset($_SESSION['message'])) { ?>
         <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
           <?= htmlspecialchars($_SESSION['message']) ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?php unset($_SESSION['message']); } ?>
+      <?php unset($_SESSION['message']);
+      } ?>
 
-        <!-- Formulario para buscar justificacionAusencia -->
-        <div class="col-md-9" tyle="padding-left: 2rem;">
-        <form method="POST" action="justificacionAusencia/find.php" >
-          <button class="btn btn-info" type="submit" name="buscar" >Buscar</button>
-        </form>
-        </div>
-      </div>
+      <!-- Formulario para buscar justificacionAusencia -->
 
-      <div class="col-md-9"  style="padding-left: 2rem;">  
-        <table class="table table-bordered" style="padding-left: 2rem;">
-          <thead>
-            <tr>
-              <th>ID justificacionAusencia</th>
-              <th>Fecha solicitud</th>
-              <th>Fecha Ausente</th>
-              <th>Archivos</th>
-              <th>Justificacion</th>
-              <th>Estado</th>
-              <th>Descripcion</th>
-              <th>Encargado</th>
-              <th>idEmpleado</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody>
-        <?php foreach ($justificacion as $row) { ?>
+    </div>
+    <br>
+    <div>
+    <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar justificación...">
+    </div>
+    <br>
+    <div class="col-md-9" style="padding-left: 2rem;">
+      <table id="tabla" class="table table-bordered" style="padding-left: 2rem;">
+        <thead>
+          <tr>
+            <th>ID justificacionAusencia</th>
+            <th>Fecha solicitud</th>
+            <th>Fecha Ausente</th>
+            <th>Archivos</th>
+            <th>Justificación</th>
+            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Encargado</th>
+            <th>ID Empleado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($justificacion as $row) { ?>
             <tr>
               <td><?php echo htmlspecialchars($row['idJustificacionAusencia']); ?></td>
               <td><?php echo htmlspecialchars($row['fechaSolicitud']); ?></td>
@@ -161,11 +162,9 @@ $justificacion = consultarJustificacion(); ?>
             </tr>
           <?php } ?>
         </tbody>
-        </table>
-      </div>
+      </table>
     </div>
   </main>
 </body>
 
 </html>
-

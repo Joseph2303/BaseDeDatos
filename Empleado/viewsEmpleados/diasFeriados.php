@@ -38,18 +38,21 @@ $diasFeriados = consultarDiasFeriados();
   table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px;
+    max-width: 950px;
   }
 
   th,
   td {
     padding: 8px;
     text-align: left;
+    border: 1px solid #ccc;
+    
   }
 
   th {
     background-color: #93D78C;
     color: #fff;
+    border: 1px solid #93D78C;
   }
 
   button {
@@ -91,38 +94,40 @@ $diasFeriados = consultarDiasFeriados();
     display: table;
     clear: both;
   }
+
+  
 </style>
+
 <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9) ;">
-  <div class="row">
-    <div class="col-md-10">
-      <!---->
-    </div>
+
     <div class="col-md-10">
       <h1 class="text-center">Días Feriados</h1>
-      <form method="POST" action="diasFeriados/find.php">
-        <button class="btn btn-success" type="submit" name="">Buscar </button>
-      </form>
-
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>ID de dias Feriado</th>
-            <th>Dia Feriado</th>
-            <th>Descripcion</th>
-            <th>Tipo De Feriado</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($diasFeriados as $row) { ?>
-            <tr>
-              <td><?php echo htmlspecialchars($row['idDiasFeriados']); ?></td>
-              <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-              <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-              <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
     </div>
-  </div>
+    <br>
+
+    <div>
+      <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar día feriado...">
+    </div>
+  <br>
+  <table id="tabla" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID de días Feriado</th>
+          <th>Día Feriado</th>
+          <th>Descripcion</th>
+          <th>Tipo De Feriado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($diasFeriados as $row) { ?>
+          <tr>
+            <td><?php echo htmlspecialchars($row['idDiasFeriados']); ?></td>
+            <td><?php echo htmlspecialchars($row['fecha']); ?></td>
+            <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+            <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+
 </main>

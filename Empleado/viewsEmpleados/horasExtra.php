@@ -4,8 +4,6 @@ if (isset($_SESSION['logged_in_admin']) && $_SESSION['logged_in_admin'] === true
 }
 include('../includ/proted.php');
 
-// Funcion de mostrar horas
-
 function consultaExtras()
 {
   $query = "SELECT * FROM horasExtra  ORDER BY idHorasExtra DESC";
@@ -48,7 +46,7 @@ $horasExtra = consultaExtras();
   th,
   td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
   }
 
   th {
@@ -97,17 +95,14 @@ $horasExtra = consultaExtras();
   }
 </style>
 <<main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9) ;">
-  <div class="row">
-    <div class="col-md-10">
-      <!---->
-    </div>
-    <div class="col-md-10">
-      <h1 class="text-center">Horas Extra</h1>
-      <form method="POST" action="horasExtra/find.php">
-        <button class="btn btn-success" type="submit" name="">Buscar </button>
-      </form>
 
-      <table class="table table-bordered">
+      <h1 class="text-center">Horas Extras</h1>
+      <br>
+      <div>
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar horas extra...">
+      </div>
+      <br>
+      <table id="tabla" class="table table-bordered">
         <thead>
           <tr>
             <th>ID horas extras</th>
@@ -125,6 +120,4 @@ $horasExtra = consultaExtras();
           <?php } ?>
         </tbody>
       </table>
-    </div>
-  </div>
-</main>
+  </main>

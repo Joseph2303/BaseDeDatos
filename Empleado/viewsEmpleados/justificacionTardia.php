@@ -52,8 +52,8 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         table {
             border-collapse: collapse;
             width: 100%;
-            max-width: 650px;
-            /* Ajusta este valor según tus necesidades */
+            max-width: 950px;
+            
         }
 
         th,
@@ -156,14 +156,14 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9)">
 
         <div class="justificacion">
-            <h1>Justificación de Tardia</h1>
+            <h1>Justificación de Tardía</h1>
         </div>
         <table id="tabla">
             </thead>
             <tr>
                 <th>ID de Justificación Tardía</th>
                 <th>Fecha</th>
-                <th>Tipo de tardia</th>
+                <th>Tipo de tardía</th>
                 <th>Cantidad de minutos tarde</th>
                 <th>Seleccionar</th>
             </tr>
@@ -188,7 +188,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
             <input type="text" id="idJustificacionTardia" name="idJustificacionTardia" readonly><br><br>
 
             <label for="fecha">Fecha:</label><br>
-            <input type="text" id="fecha" name="fecha" readonly><br><br>
+            <input type="date" id="fecha" name="fecha" readonly><br><br>
 
             <label for="documento">Documento:</label><br>
             <input type="file" id="documento" name="documento"><br><br>

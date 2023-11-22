@@ -5,16 +5,17 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 }
 include('../includ/proted.php');
 
-function consultarUsuarios() {
+function consultarUsuarios()
+{
   $query = "SELECT * FROM usuario ORDER BY idUsuario DESC";
 
   try {
-      $stmt = $GLOBALS['conn']->query($query);
-      $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $rows;
+    $stmt = $GLOBALS['conn']->query($query);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
   } catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
-      return [];
+    echo "Error: " . $e->getMessage();
+    return [];
   }
 }
 
@@ -39,13 +40,14 @@ $usuarios = consultarUsuarios();
   table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px; /* Ajusta este valor según tus necesidades */
+    max-width: 650px;
+
   }
 
   th,
   td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
   }
 
   th {
@@ -96,10 +98,10 @@ $usuarios = consultarUsuarios();
   }
 </style>
 <main class="container p-4 col-9">
-  <div class="row">
-  <h1 class="text-center">Editar Usuario</h1>
+ 
+    <h1 class="text-center">Editar Usuario</h1>
+    <br>
     <div class="col-md-3">
-      <!-- MESSAGES -->
       <?php if (isset($_SESSION['message'])) { ?>
         <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
           <?= htmlspecialchars($_SESSION['message']) ?>
@@ -107,42 +109,41 @@ $usuarios = consultarUsuarios();
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <?php unset($_SESSION['message']);
+      <?php unset($_SESSION['message']);
       } ?>
     </div>
-    <div class="col-md-9">
-    <form method="POST" action="usuario/find.php">
-        <button class="btn btn-info " type="submit" name="buscar">Buscar</button>
-      </form>
-      <table class="table table-bordered">
+      
+      <div>
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar usuario...">
+      </div>
+      <br>
+      <table id="tabla" class="table table-bordered">
         <thead>
           <tr>
-            <th>id Usuario</th>
+            <th>ID Usuario</th>
             <th>Nombre de Usuario</th>
             <th>Tipo Usuario</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
-                <?php foreach ($usuarios as $row) { ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['idUsuario']); ?></td>
-                        <td><?php echo htmlspecialchars($row['username']); ?></td>
-                        <td><?php echo htmlspecialchars($row['tipoUsuario']); ?></td>
-                        <td>
-                        
-                            <a href="usuario/edit.php?idUsuario=<?php echo htmlspecialchars($row['idUsuario']); ?>" class="btn btn-info">
-                                <i class="fas fa-marker"></i>
-                            </a>
-                            <a href="usuario/delete.php?idUsuario=<?php echo htmlspecialchars($row['idUsuario']); ?>" class="btn btn-danger" onclick="return confirmarEliminacion();">
-                                <i class="far fa-trash-alt"></i>
-                            </a>
+          <?php foreach ($usuarios as $row) { ?>
+            <tr>
+              <td><?php echo htmlspecialchars($row['idUsuario']); ?></td>
+              <td><?php echo htmlspecialchars($row['username']); ?></td>
+              <td><?php echo htmlspecialchars($row['tipoUsuario']); ?></td>
+              <td>
 
-                        </td>
-                    </tr>
-                <?php } ?>
-                </tbody>
+                <a href="usuario/edit.php?idUsuario=<?php echo htmlspecialchars($row['idUsuario']); ?>" class="btn btn-info">
+                  <i class="fas fa-marker"></i>
+                </a>
+                <a href="usuario/delete.php?idUsuario=<?php echo htmlspecialchars($row['idUsuario']); ?>" class="btn btn-danger" onclick="return confirmarEliminacion();">
+                  <i class="far fa-trash-alt"></i>
+                </a>
+
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
       </table>
-    </div>
-  </div>
-
+</main>

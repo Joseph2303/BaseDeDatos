@@ -29,7 +29,7 @@ include("../db.php");
     background-color: #fff;
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px; /* Ajusta este valor según tus necesidades */
+    max-width: 650px; 
   }
 
   th,

@@ -13,8 +13,11 @@
   <!-- FONT AWESOME -->
   <link rel="icon" type="image/x-icon" href="img/letra-h.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   <script>
     function changeView(view) {
       var container = document.getElementById('view-container');
@@ -145,6 +148,7 @@
       /* para que aparezca por encima de todo lo demás */
     }
   </style>
+
 </head>
 
 <body style="background-image: url(img/aeropuerto-daniel-oduber-liberia.jpg);  background-repeat:  no-repeat;  background-size: cover ; font-family: 'century Gothic', sans-serif ;">
@@ -267,7 +271,7 @@
   <script>
     setTimeout(function() {
       document.getElementById('success-message').style.display = 'none';
-    }, 95000);
+    }, 7000);
   </script>
 
   <div id="view-container">
@@ -318,14 +322,8 @@
     }
     ?>
   </div>
-</body>
-<script>
-  function confirmarEliminacion() {
-    return confirm('¿Estás seguro de que deseas eliminar?');
-  }
-</script>
 
-<script>
+  <script>
   function mostrarFormulario(checkbox) {
     var formulario = document.getElementById("formulario");
     if (checkbox.checked) {
@@ -357,6 +355,61 @@
   }
 </script>
 
+  <script>
+    function cargarPagina(pagina) {
+        // Utiliza AJAX para cargar los datos de la página
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Actualiza el contenido de la tabla con los nuevos datos
+                document.getElementById("tabla").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "viewsEncargados/registroAusentismo.php?pagina=" + pagina, true);
+        xhttp.send();
+    }
+
+</script>
+
+
+  <script>
+    /////buscador
+    function filtrar() {
+      const inputBuscar = document.getElementById("buscar");
+      const tabla = document.getElementById("tabla");
+
+      inputBuscar.addEventListener("input", function() {
+        const filtro = inputBuscar.value.toLowerCase();
+        const filas = tabla.getElementsByTagName("tr");
+
+        for (let i = 1; i < filas.length; i++) {
+          const celdas = filas[i].getElementsByTagName("td");
+          let mostrarFila = false;
+
+          for (let j = 0; j < celdas.length; j++) {
+            const textoCelda = celdas[j].textContent.toLowerCase();
+            if (textoCelda.includes(filtro)) {
+              mostrarFila = true;
+              break;
+            }
+          }
+
+          filas[i].style.display = mostrarFila ? "" : "none";
+        }
+      });
+    }
+    ////paginacion
+  </script>
+
+</body>
+<script>
+  function confirmarEliminacion() {
+    return confirm('¿Estás seguro de que deseas eliminar?');
+  }
+</script>
+
+
+
 
 <script>
   document.getElementById('foto').addEventListener('change', function(e) {
@@ -369,35 +422,27 @@
   });
 
 
-
-
-
-
-
-
-
-
   function mostrarPopup() {
     document.getElementById('popup').style.display = 'flex';
-}
+  }
 
-function cerrarPopup() {
+  function cerrarPopup() {
     document.getElementById('popup').style.display = 'none';
-}
+  }
 
-function eliminarFila(btn) {
+  function eliminarFila(btn) {
     var row = btn.parentNode.parentNode;
     row.parentNode.removeChild(row);
-}
+  }
 
-function actualizarFila(btn) {
+  function actualizarFila(btn) {
     var row = btn.parentNode.parentNode;
     var cells = row.getElementsByTagName("td");
 
-    var fechaSolicitud = cells[0].textContent;
-    var fechaAusencia = cells[1].textContent;
-    var archivos = cells[2].textContent;
-    var justificacion = cells[3].textContent;
+    var fechaSolicitud = cells[1].textContent;
+    var fechaAusencia = cells[2].textContent;
+    var archivos = cells[3].textContent;
+    var justificacion = cells[4].textContent;
 
     var formHTML = `
         <td><input type="date" value="${fechaSolicitud}"></td>
@@ -412,28 +457,133 @@ function actualizarFila(btn) {
     `;
 
     row.innerHTML = formHTML;
-}
+  }
 
 
-function guardarCambios(btn) {
+  function guardarCambios(btn) {
     var row = btn.parentNode.parentNode;
     var cells = row.getElementsByTagName("td");
-    
-    var fechaSolicitud = cells[0].querySelector("input").value;
-    var fechaAusencia = cells[1].querySelector("input").value;
-    var archivos = cells[2].querySelector("input").value;
-    var justificacion = cells[3].querySelector("input").value;
-    
-    cells[0].innerHTML = fechaSolicitud;
-    cells[1].innerHTML = fechaAusencia;
-    cells[2].innerHTML = archivos;
-    cells[3].innerHTML = justificacion;
-    
+
+    var fechaSolicitud = cells[1].querySelector("input").value;
+    var fechaAusencia = cells[2].querySelector("input").value;
+    var archivos = cells[3].querySelector("input").value;
+    var justificacion = cells[4].querySelector("input").value;
+
+    cells[1].innerHTML = fechaSolicitud;
+    cells[2].innerHTML = fechaAusencia;
+    cells[3].innerHTML = archivos;
+    cells[4].innerHTML = justificacion;
+
     var accionesCell = row.querySelector("td:last-child");
     accionesCell.innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button> ' +
-                             '<button onclick="actualizarFila(this)">Actualizar</button>';
-}
+      '<button onclick="actualizarFila(this)">Actualizar</button>';
+  }
+</script>
 
+<script>
+  function mostrarbotones(checkboxElement) {
+    var botones = document.querySelector('.botones');
+
+    if (checkboxElement.checked) {
+      botones.style.display = 'block';
+    } else {
+      botones.style.display = 'none';
+    }
+  }
+
+  function mostrarFormulario(checkboxElement) {
+   // var botones = document.querySelector('.botones');
+    var formulario = document.getElementById('formulario');
+
+    if (checkboxElement.checked) {
+   //  botones.style.display = 'block';
+      formulario.style.display = 'block';
+    } else {
+    //  botones.style.display = 'none';
+      formulario.style.display = 'none';
+    }
+  }
+  // Función para ocultar los botones cuando se hace clic fuera del checkbox
+  document.addEventListener('click', function(event) {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function(checkbox) {
+      if (!checkbox.contains(event.target)) {
+        checkbox.checked = false;
+        mostrarFormulario(checkbox);
+      }
+    });
+  });
+
+  // Función para prevenir la propagación del clic en los botones
+  function detenerPropagacion(event) {
+    event.stopPropagation();
+  }
+</script>
+
+
+
+
+
+<!--paginacion de Rtardia-->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Variables
+    var table = document.getElementById("tablaTardia");
+    var rows = table.getElementsByTagName("tr");
+    var numRows = rows.length;
+    var rowsPerPage = 5; // Puedes ajustar el número de filas por página aquí
+    var numPages = Math.ceil(numRows / rowsPerPage);
+
+    // Crear cuadro de selección para la cantidad de registros por página
+    var selectPerPage = document.createElement("select");
+    selectPerPage.id = "rowsPerPage";
+    var options = [5, 10, 20, 50]; // Puedes ajustar las opciones según tus necesidades
+    for (var i = 0; i < options.length; i++) {
+      var option = document.createElement("option");
+      option.value = options[i];
+      option.text = options[i];
+      selectPerPage.appendChild(option);
+    }
+    selectPerPage.addEventListener("change", function () {
+      rowsPerPage = parseInt(this.value);
+      numPages = Math.ceil(numRows / rowsPerPage);
+      showPage(1);
+    });
+
+    // Agregar el cuadro de selección al DOM
+    var container = document.querySelector(".container");
+    container.insertBefore(selectPerPage, table);
+
+    // Función para mostrar la página seleccionada
+    function showPage(page) {
+      for (var i = 0; i < numRows; i++) {
+        rows[i].style.display = i >= (page - 1) * rowsPerPage && i < page * rowsPerPage ? "" : "none";
+      }
+    }
+
+    // Función para generar los botones de paginación
+    function createPaginationButtons() {
+      var paginationContainer = document.createElement("div");
+      paginationContainer.classList.add("pagination");
+
+      for (var i = 1; i <= numPages; i++) {
+        var button = document.createElement("button");
+        button.innerHTML = i;
+        button.addEventListener("click", function () {
+          showPage(parseInt(this.innerHTML));
+        });
+        paginationContainer.appendChild(button);
+      }
+
+      container.appendChild(paginationContainer);
+    }
+
+    // Inicializar la tabla con la primera página
+    showPage(1);
+
+    // Crear botones de paginación
+    createPaginationButtons();
+  });
 </script>
 
 </html>

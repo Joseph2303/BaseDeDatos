@@ -4,16 +4,17 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
 }
 include('../includ/proted.php');
 
-function consultarHorario() {
+function consultarHorario()
+{
   $query = "SELECT * FROM horario WHERE DATEPART(HOUR, horaInicio) > 7 OR (DATEPART(HOUR, horaInicio) = 7 AND DATEPART(MINUTE, horaInicio) > 5) ORDER BY idHorario DESC";
 
   try {
-      $stmt = $GLOBALS['conn']->query($query);
-      $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return $rows;
+    $stmt = $GLOBALS['conn']->query($query);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
   } catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
-      return [];
+    echo "Error: " . $e->getMessage();
+    return [];
   }
 }
 
@@ -39,7 +40,8 @@ $horario = consultarHorario();
   table {
     border-collapse: collapse;
     width: 100%;
-    max-width: 650px; /* Ajusta este valor según tus necesidades */
+    max-width: 950px;
+    
   }
 
   th,
@@ -95,39 +97,40 @@ $horario = consultarHorario();
   }
 </style>
 <main class="container p-4 col-9">
-  <div class="row">
-    
-    <div class="col-10">
-   <!---->
-    </div>
-    <div class="col-md-9">
-    <h1 class="text-center">Registro de Tardía</h1>
-    <form method="POST" action="horario/find.php">
-        <button class="btn btn-info" type="submit" name="buscar">Buscar</button>
-      </form>
-      <table class="table table-bordered">
+  <div>
+
+
+    <div>
+      <h1 class="text-center">Registro de Tardía</h1>
+      <br>
+      <div>
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar resgistro...">
+      </div>
+      <br>
+      <table id="tablaTardia" class="table table-bordered">
         <thead>
           <tr>
             <th>ID Horario</th>
-            <th>hora de inicio</th>
-            <th>hora de salida</th>
-            <th>fecha de tardia</th>
+            <th>Hora de inicio</th>
+            <th>Hora de salida</th>
+            <th>Fecha de tardía</th>
             <th>ID Empleado</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($horario as $row) { ?>
-              <tr>
-                  <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
-                  <td><?php echo htmlspecialchars($row['horaInicio']); ?></td>
-                  <td><?php echo htmlspecialchars($row['horaFin']); ?></td>
-                  <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-                  <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
-  
-              </tr>
+            <tr>
+              <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
+              <td><?php echo htmlspecialchars($row['horaInicio']); ?></td>
+              <td><?php echo htmlspecialchars($row['horaFin']); ?></td>
+              <td><?php echo htmlspecialchars($row['fecha']); ?></td>
+              <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
+
+            </tr>
           <?php } ?>
-      </tbody>
+        </tbody>
       </table>
+      <div id="rowsPerPageContainer"></div>
     </div>
   </div>
 </main>
