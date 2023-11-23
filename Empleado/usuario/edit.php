@@ -8,41 +8,41 @@ $tipoUsuario = '';
 
 if (isset($_GET['idUsuario'])) {
 
-    $idUsuario = $_GET['idUsuario'];
-    $query = "EXEC paBuscarUsuarioPorID @idUsuario=?";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(1, $idUsuario, PDO::PARAM_INT);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-  
-    if ($row) {
-        $idUsuario = $row['idUsuario'];
-        $username = $row['username'];
-        $contrasena = $row['contrasena'];
-        $tipoUsuario = $row['tipoUsuario'];
-      }
+  $idUsuario = $_GET['idUsuario'];
+  $query = "EXEC paBuscarUsuarioPorID @idUsuario=?";
+  $stmt = $conn->prepare($query);
+  $stmt->bindParam(1, $idUsuario, PDO::PARAM_INT);
+  $stmt->execute();
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if ($row) {
+    $idUsuario = $row['idUsuario'];
+    $username = $row['username'];
+    $contrasena = $row['contrasena'];
+    $tipoUsuario = $row['tipoUsuario'];
+  }
 }
 
 
 if (isset($_POST['update'])) {
-    $idUsuario = $_POST['idUsuario'];
-    $username = $_POST['username'];
-    $contrasena = $_POST['contrasena'];
-    $tipoUsuario = $_POST['tipoUsuario'];
-  
-    $query = "EXEC paActualizarUsuario @idUsuario=?, @nuevoUsername=?, @nuevaContrasena=?, @nuevoTipoUsuario=?";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(1, $idUsuario, PDO::PARAM_INT);
-    $stmt->bindParam(2, $username, PDO::PARAM_STR);
-    $stmt->bindParam(3, $contrasena, PDO::PARAM_STR);
-    $stmt->bindParam(4, $tipoUsuario, PDO::PARAM_STR);
-    $stmt->execute();
-  
-    $_SESSION['message'] = 'Usuario actualizado exitosamente';
-    $_SESSION['message_type'] = 'success';
-    $_SESSION['usuario_message'] = true;
-    header('Location: ../index.php');
-    exit();
+  $idUsuario = $_POST['idUsuario'];
+  $username = $_POST['username'];
+  $contrasena = $_POST['contrasena'];
+  $tipoUsuario = $_POST['tipoUsuario'];
+
+  $query = "EXEC paActualizarUsuario @idUsuario=?, @nuevoUsername=?, @nuevaContrasena=?, @nuevoTipoUsuario=?";
+  $stmt = $conn->prepare($query);
+  $stmt->bindParam(1, $idUsuario, PDO::PARAM_INT);
+  $stmt->bindParam(2, $username, PDO::PARAM_STR);
+  $stmt->bindParam(3, $contrasena, PDO::PARAM_STR);
+  $stmt->bindParam(4, $tipoUsuario, PDO::PARAM_STR);
+  $stmt->execute();
+
+  $_SESSION['message'] = 'Usuario actualizado exitosamente';
+  $_SESSION['message_type'] = 'success';
+  $_SESSION['usuario_message'] = true;
+  header('Location: ../index.php');
+  exit();
 }
 
 
@@ -50,6 +50,7 @@ if (isset($_POST['update'])) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Usuario</title>
@@ -61,6 +62,7 @@ if (isset($_POST['update'])) {
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
+
 <body>
   <div class="container p-4">
     <div class="row justify-content-center">
@@ -78,7 +80,7 @@ if (isset($_POST['update'])) {
               <div class="form-group row">
                 <label class="col-md-4 col-form-label custom-label">Nombre de Usuario</label>
                 <div class="col-md-8">
-                  <input name="username" type="text" class="form-control" value="<?php echo $username; ?>" placeholder="Nombre de Usuario" >
+                  <input name="username" type="text" class="form-control" value="<?php echo $username; ?>" placeholder="Nombre de Usuario">
                 </div>
               </div>
               <div class="form-group row">
@@ -90,9 +92,13 @@ if (isset($_POST['update'])) {
               <div class="form-group row">
                 <label class="col-md-4 col-form-label custom-label">Tipo de Usuario</label>
                 <div class="col-md-8">
-                  <input name="tipoUsuario" type="text" class="form-control" value="<?php echo $tipoUsuario; ?>" placeholder="Tipo de Usuario">
+                  <select name="tipoUsuario" class="form-control">
+                    <option value="empleado" <?php if ($tipoUsuario == 'empleado') echo 'selected'; ?>>Empleado</option>
+                    <option value="admin" <?php if ($tipoUsuario == 'admin') echo 'selected'; ?>>Admin</option>
+                  </select>
                 </div>
               </div>
+
               <button class="btn btn-success" name="update">Guardar</button>
               <a class="btn btn-info" href="../index.php">Volver</a>
             </form>
@@ -102,6 +108,5 @@ if (isset($_POST['update'])) {
     </div>
   </div>
 </body>
+
 </html>
-
-

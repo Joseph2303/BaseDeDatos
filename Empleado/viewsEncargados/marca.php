@@ -99,7 +99,7 @@ $marcas = consultarMarca();
 
       <br>
       <div>
-        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar hora extra...">
+        <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar marca...">
       </div>
       <br>
       <div class="col-md-12">

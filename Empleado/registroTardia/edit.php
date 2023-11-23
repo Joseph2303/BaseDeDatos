@@ -73,7 +73,7 @@ if (isset($_GET['idJustificacionTardia'])) {
         <div class="card-body">
           <form action="edit.php?idJustificacionTardia=<?php echo $_GET['idJustificacionTardia']; ?>" method="POST">
           <div class="form-group row">
-              <label class="col-md-4 col-form-label">idJustificacionTardia</label>
+              <label class="col-md-4 col-form-label">Id de Justificacion de Tardia</label>
               <div class="col-md-8">
                 <input name="idJustificacionTardia" type="text" class="form-control" value="<?php echo $idJustificacionTardia; ?>" readonly>
               </div>
@@ -91,7 +91,7 @@ if (isset($_GET['idJustificacionTardia'])) {
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-4 col-form-label">Justificación Tardía</label>
+              <label class="col-md-4 col-form-label">Justificación</label>
               <div class="col-md-8">
                 <input name="justiTardia" type="text" class="form-control" value="<?php echo $justiTardia; ?>" required>
               </div>

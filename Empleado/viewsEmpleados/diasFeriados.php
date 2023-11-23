@@ -114,7 +114,7 @@ $diasFeriados = consultarDiasFeriados();
         <tr>
           <th>ID de días Feriado</th>
           <th>Día Feriado</th>
-          <th>Descripcion</th>
+          <th>Descripción</th>
           <th>Tipo De Feriado</th>
         </tr>
       </thead>

@@ -114,7 +114,6 @@ $registroA = consultarRegistroAusentismo();
           <tr>
             <th>ID Registro Ausentismo</th>
             <th>Fecha</th>
-            <th>ID Horario</th>
             <th>ID Empleado</th>
           </tr>
         </thead>
@@ -127,7 +126,6 @@ $registroA = consultarRegistroAusentismo();
             <tr class="fila-paginacion">
               <td><?php echo htmlspecialchars($row['idRegistroAusentismo']); ?></td>
               <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-              <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
               <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
             </tr>
 

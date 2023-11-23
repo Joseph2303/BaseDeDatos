@@ -193,12 +193,12 @@ $empleados = consultarEmpleados(); ?>
           <tr>
             <th>ID Empleado</th>
             <th>Nombre</th>
-            <th>Apellido1</th>
-            <th>Apellido2</th>
+            <th>Primer Apellido</th>
+            <th>Segundo Apellido</th>
             <th>Email</th>
             <th>Fecha de contratación</th>
-            <th>Username</th>
-            <th>Puesto</th>
+            <th>Id Usuario</th>
+            <th>Id Puesto</th>
             <th>Acción</th>
           </tr>
         </thead>

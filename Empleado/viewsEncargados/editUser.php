@@ -99,7 +99,7 @@ $usuarios = consultarUsuarios();
 </style>
 <main class="container p-4 col-9">
  
-    <h1 class="text-center">Editar Usuario</h1>
+    <h1 class="text-center">Modificar Usuario</h1>
     <br>
     <div class="col-md-3">
       <?php if (isset($_SESSION['message'])) { ?>

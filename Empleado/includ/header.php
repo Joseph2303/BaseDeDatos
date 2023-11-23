@@ -171,13 +171,13 @@
               <a class="nav-link bi bi-cup-straw icon" href="#" onclick="changeView(\'diasFeriados\')"> Días Feriados</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bi bi-calendar icon" href="#" onclick="changeView(\'horario\')"> Resgitrar Asistencia</a>
+              <a class="nav-link bi bi-calendar icon" href="#" onclick="changeView(\'horario\')"> Registrar Asistencia</a>
             </li>
             <li class="nav-item">
               <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionAusencia\')"> Justificación de Ausencias</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionTardia\')"> Justificación de Tardias</a>
+            <a class="nav-link bi bi-clipboard-check icon" href="#" onclick="changeView(\'justificacionTardia\')"> Justificación de Tardías</a>
           </li>
             <li class="nav-item">
               <a class="nav-link bi bi-hourglass-split icon" href="#" onclick="changeView(\'horasExtra\')"> Horas Extra</a>
@@ -228,6 +228,9 @@
             </li>
             <li class="nav-item1">
               <a class="nav-link bi bi-hourglass-split icon" href="#" onclick="changeView2(\'HorasEncargado\')" style="color: black;">  Horas Extra</a>
+            </li>
+            <li class="nav-item1">
+            <a class="nav-link bi bi-sticky icon" href="#" onclick="changeView2(\'justificacionTardia\')" style="color: black;">   Aprobación de Tardias</a>
             </li>
             <br>
             <br>
@@ -334,8 +337,10 @@
         })
         .then(response => {
           if (response.ok) {
+            alert("Backup realizado con éxito")
             console.log('Backup realizado con éxito');
           } else {
+            alert("Error al ejecutar el backup")
             throw new Error('Error al ejecutar el backup');
           }
         })

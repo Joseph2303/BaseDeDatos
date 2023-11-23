@@ -71,76 +71,78 @@ if (isset($_POST['update'])) {
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <div class="container p-4">
-<div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header">Editar solicitud</div>
-          <div class="card-body">
-            <form action="edit.php?idSolicitudVacaciones=<?php echo $_GET['idSolicitudVacaciones']; ?>" method="POST">
-                <div class="form-group row">
-                <label class="col-md-4 col-form-label custom-label" >Id de la solicitud</label>
-                <div class="col-md-8">
-                  <input name="idSolicitudVacaciones" type="text" class="form-control" value="<?php echo $idSolicitudVacaciones; ?>" placeholder="User name" readonly>
-                </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">Editar solicitud</div>
+        <div class="card-body">
+          <form action="edit.php?idSolicitudVacaciones=<?php echo $_GET['idSolicitudVacaciones']; ?>" method="POST">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Id de la solicitud</label>
+              <div class="col-md-8">
+                <input name="idSolicitudVacaciones" type="text" class="form-control" value="<?php echo $idSolicitudVacaciones; ?>" placeholder="User name" readonly>
               </div>
-                <div class="form-group row">
-                <label  class="col-md-4 col-form-label custom-label">Fecha de la solicitud</label>
-                <div class="col-md-8">
-                  <input name="fechSolicitud" type="date" class="form-control" value="<?php echo $fechSolicitud; ?>" placeholder="Update contrasena" readonly> 
-                </div>
-
-              </div>
-                <div class="form-group row">
-
-                <label  class="col-md-4 col-form-label custom-label">Fecha de inicio de las vaciones</label>
-                <div class="col-md-8">
-
-                  <input name="fechInicio" type="date" class="form-control" value="<?php echo $fechInicio; ?>" placeholder="Update tipoUsuario" readonly>
-                </div> 
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Fecha de la solicitud</label>
+              <div class="col-md-8">
+                <input name="fechSolicitud" type="date" class="form-control" value="<?php echo $fechSolicitud; ?>" placeholder="Update contrasena" readonly>
               </div>
 
-                <div class="form-group row">
-                <label  class="col-md-4 col-form-label custom-label">Fecha de finalización</label>
-                <div class="col-md-8">
+            </div>
+            <div class="form-group row">
 
-                  <input name="fechFin" type="date" class="form-control" value="<?php echo $fechFin; ?>" placeholder="Update tipoUsuario" readonly>
-                </div> 
+              <label class="col-md-4 col-form-label custom-label">Fecha de inicio de las vaciones</label>
+              <div class="col-md-8">
+
+                <input name="fechInicio" type="date" class="form-control" value="<?php echo $fechInicio; ?>" placeholder="Update tipoUsuario" readonly>
               </div>
-                <div class="form-group row">
-                <label  class="col-md-4 col-form-label custom-label">Estado de la solicitud</label>
+            </div>
 
-                <div class="col-md-8">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Fecha de finalización</label>
+              <div class="col-md-8">
 
-                  <input name="estado" type="text" class="form-control" value="<?php echo $estado; ?>" placeholder="estado " >
-                </div>
+                <input name="fechFin" type="date" class="form-control" value="<?php echo $fechFin; ?>" placeholder="Update tipoUsuario" readonly>
               </div>
-                <div class="form-group row">
-                  <label class="col-md-4 col-form-label custom-label">Nombre del responsable</label>
-                  <div class="col-md-8">
-
-                  <input name="responsableAut" type="text" class="form-control" value="<?php echo $responsableAut; ?>" placeholder="nombre" >
-                  </div> 
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Estado de la solicitud</label>
+              <div class="col-md-8">
+                <select name="estado" class="form-control">
+                  <option value="Aprobada" <?php echo ($estado === 'Aprobada') ? 'selected' : ''; ?>>Aprobada</option>
+                  <option value="Rechazada" <?php echo ($estado === 'Rechazada') ? 'selected' : ''; ?>>Rechazada</option>
+                </select>
               </div>
-                <div class="form-group row">
-                <label class="col-md-4 col-form-label custom-label">Descripcion</label>
+            </div>
 
-                <div class="col-md-8">
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Nombre del responsable</label>
+              <div class="col-md-8">
 
-                  <input name="descripcion" type="text" class="form-control" value="<?php echo $descripcion; ?>" placeholder=" descripcion">
-                </div>  
+                <input name="responsableAut" type="text" class="form-control" value="<?php echo $responsableAut; ?>" placeholder="nombre">
               </div>
-                <div class="form-group row">
-                <label class="col-md-4 col-form-label custom-label">Id del empleado</label>
-                <div class="col-md-8">
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Descripcion</label>
 
-                  <input name="idEmpleado" type="text" class="form-control" value="<?php echo $idEmpleado; ?>" placeholder="ID" readonly>
-                </div>
+              <div class="col-md-8">
+
+                <input name="descripcion" type="text" class="form-control" value="<?php echo $descripcion; ?>" placeholder=" descripcion">
               </div>
-                <button class="btn btn-success" name="update">Guardar</button>
-                <a class="btn btn-info" href="../index.php">Volver</a>
-            </form>
-          </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label custom-label">Id del empleado</label>
+              <div class="col-md-8">
+
+                <input name="idEmpleado" type="text" class="form-control" value="<?php echo $idEmpleado; ?>" placeholder="ID" readonly>
+              </div>
+            </div>
+            <button class="btn btn-success" name="update">Guardar</button>
+            <a class="btn btn-info" href="../index.php">Volver</a>
+          </form>
         </div>
       </div>
     </div>
   </div>
+</div>

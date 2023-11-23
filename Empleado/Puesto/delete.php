@@ -1,13 +1,13 @@
 <?php
 include("../db.php");
 
-if (isset($_GET['idPuesto'])) {
-  $idPuesto = $_GET['idPuesto'];
+if (isset($_GET['puesto'])) {
+  $puesto = $_GET['puesto'];
 
     try {
-        $query = "EXEC paEliminarPuesto @idPuesto=?";
+        $query = "EXEC paEliminarPuesto @puesto=?";
         $stmt = $conn->prepare($query);
-        $stmt->bindParam(1, $idPuesto, PDO::PARAM_INT);
+        $stmt->bindParam(1, $puesto, PDO::PARAM_INT);
         $stmt->execute();
 
         $_SESSION['message'] = 'Puesto eliminado exitosamente';

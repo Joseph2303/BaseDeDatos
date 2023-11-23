@@ -184,9 +184,9 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
                 <th>ID de Justificación Tardía</th>
                 <th>Fecha</th>
                 <th>Documento</th>
-                <th>Jutificacion</th>
-                <th>Revision</th>
-                <th>Accion</th>
+                <th>Jutificación</th>
+                <th>Revisión</th>
+                <th>Acción</th>
             </tr>
             </thead>
             <tbody>

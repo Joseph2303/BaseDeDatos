@@ -1,5 +1,5 @@
 <?php
-include('../db.php'); 
+include('../db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
@@ -23,8 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->closeCursor();
 
+        header('Location: ../index.php');
+
         echo json_encode(array("status" => "success", "message" => "Backup realizado con éxito"));
         exit();
     }
 }
-?>

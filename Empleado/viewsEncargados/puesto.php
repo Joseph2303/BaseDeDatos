@@ -137,7 +137,7 @@ $puestos = consultarHorario();
           <tr>
             <th>ID Puesto</th>
             <th>Puesto</th>
-            <th>Accion</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -149,7 +149,7 @@ $puestos = consultarHorario();
                 <a href="Puesto/edit.php?idPuesto=<?php echo htmlspecialchars($row['idPuesto']); ?>" class="btn btn-info">
                   <i class="fas fa-marker"></i>
                 </a>
-                <a href="Puesto/delete.php?idPuesto=<?php echo htmlspecialchars($row['idPuesto']); ?>" class="btn btn-danger" onclick="return confirmarEliminacion();">
+                <a href="Puesto/delete.php?puesto=<?php echo htmlspecialchars($row['puesto']); ?>" class="btn btn-danger" onclick="return confirmarEliminacion();">
                   <i class="far fa-trash-alt"></i>
                 </a>
               </td>

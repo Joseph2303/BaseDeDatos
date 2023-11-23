@@ -249,7 +249,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         <th>Estado</th>
         <th>Descripción</th>
         <th>Nombre del encargado</th>
-        <th>Accion</th>
+        <th>Acción</th>
       </tr>
       </thead>
       <tbody>
