@@ -221,9 +221,6 @@
               <a class="nav-link bi bi-person-lines-fill" href="#" onclick="changeView2(\'editUser\')" style="color: black;">  Modificar Usuario</a>
             </li>
             <li class="nav-item1">
-              <a class="nav-link bi  bi-sticky icon" href="#" onclick="changeView2(\'justificacionAusencia\')" style="color: black;">  Justificación de Ausencia</a>
-            </li>
-            <li class="nav-item1">
               <a class="nav-link bi bi-clipboard-check-fill" href="#" onclick="changeView2(\'puesto\')" style="color: black;">  Puestos de trabajo</a>
             </li>
             <li class="nav-item1">

@@ -97,16 +97,15 @@ $horario = consultarHorario();
   }
 </style>
 <main class="container p-4 col-9">
-  <div>
-
-
-    <div>
+  
+   
       <h1 class="text-center">Registro de Tardía</h1>
       <br>
       <div>
         <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar resgistro...">
       </div>
       <br>
+      <div class="col-md-12">
       <table id="tablaTardia" class="table table-bordered">
         <thead>
           <tr>
@@ -132,5 +131,5 @@ $horario = consultarHorario();
       </table>
       <div id="rowsPerPageContainer"></div>
     </div>
-  </div>
+
 </main>

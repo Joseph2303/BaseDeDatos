@@ -101,58 +101,42 @@ $registroA = consultarRegistroAusentismo();
   }
 </style>
 <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9)">
-  <div>
-
-    <h1 class="text-center">Registro de Ausencia</h1>
+      <h1 class="text-center">Registro de Ausencia</h1>
     <br>
     <h3>Buscar</h3>
     <div>
       <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar registro...">
     </div>
     <br>
-
-    <table id="tabla" class="table table-bordered">
-      <thead>
-        <tr>
-          <th>ID Registro Ausentismo</th>
-          <th>Fecha</th>
-          <th>ID Horario</th>
-          <th>ID Empleado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-
-        foreach ($registroA as $row) {
-
-        ?>
-          <tr class="fila-paginacion">
-            <td><?php echo htmlspecialchars($row['idRegistroAusentismo']); ?></td>
-            <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-            <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
-            <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
+    <div class="col-md-12">
+      <table id="tabla" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID Registro Ausentismo</th>
+            <th>Fecha</th>
+            <th>ID Horario</th>
+            <th>ID Empleado</th>
           </tr>
+        </thead>
+        <tbody>
+          <?php
+
+          foreach ($registroA as $row) {
+
+          ?>
+            <tr class="fila-paginacion">
+              <td><?php echo htmlspecialchars($row['idRegistroAusentismo']); ?></td>
+              <td><?php echo htmlspecialchars($row['fecha']); ?></td>
+              <td><?php echo htmlspecialchars($row['idHorario']); ?></td>
+              <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
+            </tr>
 
 
 
-        <?php }
-        ?>
-      </tbody>
-    </table>
-    <?php
-    $registros_por_pagina = 10;
-    $sql = "SELECT COUNT(*) AS total FROM registroAusentismo";
-    $resultado = $conn->query($sql);
-    $fila = $resultado->fetch(PDO::FETCH_ASSOC);
-    $total_registros = $fila['total'];
+          <?php }
+          ?>
+        </tbody>
+      </table>
 
-    $total_paginas = ceil($total_registros / $registros_por_pagina);
-
-    echo "<div class='pagination'>";
-    for ($i = 1; $i <= $total_paginas; $i++) {
-      echo "<a href='viewsEncargados/registroAusentismo.php?pagina=" . $i . "'>" . $i . "</a> ";
-    }
-    echo "</div>";
-    ?>
-  </div>
+    </div>
 </main>

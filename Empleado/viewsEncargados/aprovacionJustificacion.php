@@ -19,152 +19,150 @@ function consultarJustificacion()
 }
 
 $justificacion = consultarJustificacion(); ?>
+<style>
+  .acciones {
+    padding: 50px;
+  }
 
-<html>
+  .container {
+    margin-left: 22%;
+    margin-right: 22%;
+    margin-top: 1%;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
 
-<head>
-  <style>
-    .container {
-      margin-left: 22%;
-      margin-right: 22%;
-      margin-top: 1%;
-      background-color: rgba(255, 255, 255, 0.9);
-    }
+  .alert {
+    margin-bottom: 10px;
+  }
 
-    .alert {
-      margin-bottom: 10px;
-    }
+  form {
+    margin-bottom: 20px;
+  }
 
-    form {
-      margin-bottom: 20px;
-    }
+  table {
 
-    table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 950px;
+  }
 
-      border-collapse: collapse;
-      width: 100%;
-      max-width: 950px;
-    }
+  th,
+  td {
+    padding: 8px;
+    text-align: center;
+  }
 
-    th,
-    td {
-      padding: 8px;
-      text-align: center;
-    }
+  th {
+    background-color: #8CB8D7;
+    color: #fff;
+  }
 
-    th {
-      background-color: #8CB8D7;
-      color: #fff;
-    }
+  button {
+    padding: 8px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
 
-    button {
-      padding: 8px 12px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
+  button:hover {
+    background-color: #555;
+  }
 
-    button:hover {
-      background-color: #555;
-    }
+  .btn-secondary {
+    background-color: #555;
+  }
 
-    .btn-secondary {
-      background-color: #555;
-    }
+  .btn-secondary:hover {
+    background-color: #777;
+  }
 
-    .btn-secondary:hover {
-      background-color: #777;
-    }
+  .fa-marker {
+    margin-right: 5px;
+  }
 
-    .fa-marker {
-      margin-right: 5px;
-    }
+  .search-form {
+    float: left;
+    margin-right: 20px;
+  }
 
-    .search-form {
-      float: left;
-      margin-right: 20px;
-    }
+  .data-table {
+    float: right;
+    width: calc(100% - 280px);
+  }
 
-    .data-table {
-      float: right;
-      width: calc(100% - 280px);
-    }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+</style>
 
-    .row::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-  </style>
-</head>
+<main class="container p-4 col-9">
+  <h1 class="text-center">Aprobación de Ausencias</h1>
 
-<body>
+  <div class="col-10">
+    <!-- MESSAGES -->
 
-  <main class="container p-4 col-9">
-    <div class="search-form col-10">
-      <!-- MESSAGES -->
-      <h1 class="text-center">Aprobación de Ausencias</h1>
-      <?php if (isset($_SESSION['message'])) { ?>
-        <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
-          <?= htmlspecialchars($_SESSION['message']) ?>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      <?php unset($_SESSION['message']);
-      } ?>
+    <?php if (isset($_SESSION['message'])) { ?>
+      <div class="alert alert-<?= htmlspecialchars($_SESSION['message_type']) ?> alert-dismissible fade show" role="alert">
+        <?= htmlspecialchars($_SESSION['message']) ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <?php unset($_SESSION['message']);
+    } ?>
 
-      <!-- Formulario para buscar justificacionAusencia -->
+    <!-- Formulario para buscar justificacionAusencia -->
 
-    </div>
-    <br>
-    <div>
+  </div>
+
+  <br>
+  <div>
     <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar justificación...">
-    </div>
-    <br>
-    <div class="col-md-9" style="padding-left: 2rem;">
-      <table id="tabla" class="table table-bordered" style="padding-left: 2rem;">
-        <thead>
-          <tr>
-            <th>ID justificacionAusencia</th>
-            <th>Fecha solicitud</th>
-            <th>Fecha Ausente</th>
-            <th>Archivos</th>
-            <th>Justificación</th>
-            <th>Estado</th>
-            <th>Descripción</th>
-            <th>Encargado</th>
-            <th>ID Empleado</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($justificacion as $row) { ?>
-            <tr>
-              <td><?php echo htmlspecialchars($row['idJustificacionAusencia']); ?></td>
-              <td><?php echo htmlspecialchars($row['fechaSolicitud']); ?></td>
-              <td><?php echo htmlspecialchars($row['fechaAusencia']); ?></td>
-              <td><?php echo htmlspecialchars($row['archivos']); ?></td>
-              <td><?php echo htmlspecialchars($row['justificacion']); ?></td>
-              <td><?php echo htmlspecialchars($row['estado']); ?></td>
-              <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-              <td><?php echo htmlspecialchars($row['NombreEncargado']); ?></td>
-              <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
-              <td>
-                <a href="justificacionAusencia/edit.php?idJustificacionAusencia=<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>" class="btn btn-info">
-                  <i class="fas fa-marker"></i>
-                </a>
-                <a href="justificacionAusencia/delete.php?idJustificacionAusencia=<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>" class="btn btn-danger " onclick="return confirmarEliminacion();">
-                  <i class="far fa-trash-alt"></i>
-                </a>
-              </td>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-    </div>
-  </main>
-</body>
+  </div>
+  <br>
 
-</html>
+  <div class="col-md-12">
+    <table id="tabla" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha solicitud</th>
+          <th>Fecha Ausente</th>
+          <th>Archivos</th>
+          <th>Justificación</th>
+          <th>Estado</th>
+          <th>Descripción</th>
+          <th>Encargado</th>
+          <th>ID Empleado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($justificacion as $row) { ?>
+          <tr>
+            <td><?php echo htmlspecialchars($row['idJustificacionAusencia']); ?></td>
+            <td><?php echo htmlspecialchars($row['fechaSolicitud']); ?></td>
+            <td><?php echo htmlspecialchars($row['fechaAusencia']); ?></td>
+            <td><?php echo htmlspecialchars($row['archivos']); ?></td>
+            <td><?php echo htmlspecialchars($row['justificacion']); ?></td>
+            <td><?php echo htmlspecialchars($row['estado']); ?></td>
+            <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
+            <td><?php echo htmlspecialchars($row['NombreEncargado']); ?></td>
+            <td><?php echo htmlspecialchars($row['idEmpleado']); ?></td>
+            <td>
+              <a href="justificacionAusencia/edit.php?idJustificacionAusencia=<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>" class="btn btn-info">
+                <i class="fas fa-marker"></i>
+              </a>
+              <a href="justificacionAusencia/delete.php?idJustificacionAusencia=<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>" class="btn btn-danger " onclick="return confirmarEliminacion();">
+                <i class="far fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
+</main>

@@ -92,19 +92,17 @@ $marcas = consultarMarca();
   }
 </style>
 <main class="container p-4 col-9" style="background-color: rgba(255, 255, 255, 0.9)">
-  <div>
 
-    <div class="col-md-3">
-
-    </div>
+ 
     <h1 class="text-center">Marca</h1>
 
-    <div >
+
       <br>
       <div>
         <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar hora extra...">
       </div>
       <br>
+      <div class="col-md-12">
       <table id="tabla" class="table table-bordered">
         <thead>
           <tr>
@@ -126,5 +124,4 @@ $marcas = consultarMarca();
         </tbody>
       </table>
     </div>
-  </div>
 </main>
