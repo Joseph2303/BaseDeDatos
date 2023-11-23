@@ -6,8 +6,8 @@ $fecha = '';
 $descripcion = '';
 $tipoFeriado = '';
 
-if (isset($_GET['id'])) {
-  $idDiasFeriados = $_GET['id'];
+if (isset($_GET['idDiasFeriados'])) {
+  $idDiasFeriados = $_GET['idDiasFeriados'];
   $query = "EXEC paBuscarDiaFeriadoPorID @idDiasFeriados=?";
   $stmt = $conn->prepare($query);
   $stmt->bindParam(1, $idDiasFeriados, PDO::PARAM_INT);

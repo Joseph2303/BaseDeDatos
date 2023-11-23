@@ -53,7 +53,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
       border-collapse: collapse;
       width: 100%;
       max-width: 950px;
-      
+
     }
 
     th,
@@ -108,7 +108,6 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     }
   </style>
   <style>
-
     #formulario {
       max-width: 500px;
       margin: 0 auto;
@@ -130,7 +129,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
       border-radius: 5px;
     }
 
-   
+
     input[type="submit"] {
       padding: 10px 20px;
       background-color: #ADF678;
@@ -191,40 +190,39 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
 
 
     .button {
-    padding: 10px 20px;
-    font-size: 16px;
-}
+      padding: 10px 20px;
+      font-size: 16px;
+    }
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
 
-.popup-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    position: relative;
-}
+    .popup-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      position: relative;
+    }
 
-.popup-cerrar {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
+    .popup-cerrar {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
   </style>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
 </head>
@@ -237,7 +235,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
     </div>
     <br>
     <div>
-    <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar justificación...">
+      <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar justificación...">
     </div>
     <br>
     <table id="tabla">
@@ -251,61 +249,63 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         <th>Estado</th>
         <th>Descripción</th>
         <th>Nombre del encargado</th>
-        <th>Seleccionar</th>
+        <th>Accion</th>
       </tr>
       </thead>
       <tbody>
         <?php foreach ($justificacionAusencia as $row) { ?>
           <tr data-id="<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>">
             <td><?php echo htmlspecialchars($row['idJustificacionAusencia']); ?></td>
-            <td><?php echo htmlspecialchars(date('Y-m-d', strtotime($row['fechaSolicitud']))); ?></td>
+            <td><?php echo htmlspecialchars($row['fechaSolicitud']); ?></td>
             <td><?php echo htmlspecialchars(date('Y-m-d', strtotime($row['fechaAusencia']))); ?></td>
             <td><?php echo htmlspecialchars($row['archivos']); ?></td>
             <td><?php echo htmlspecialchars($row['justificacion']); ?></td>
             <td><?php echo htmlspecialchars($row['estado']); ?></td>
             <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
             <td><?php echo htmlspecialchars($row['NombreEncargado']); ?></td>
-            <td><input type="checkbox" onchange="mostrarFormulario(this)"></td>
+            <td>
+              <a href="justificacionAusencia/edit2.php?idJustificacionAusencia=<?php echo htmlspecialchars($row['idJustificacionAusencia']); ?>" class="btn btn-info">
+                <i class="fas fa-marker"></i>
+              </a>
+            </td>
           </tr>
         <?php } ?>
       </tbody>
     </table>
     <br>
 
-    <!--<button onclick="mostrarPopup()">Solicitudes Enviadas</button-->
-
 
     <div id="popup" class="popup">
-    <div class="popup-content">
+      <div class="popup-content">
         <span class="popup-cerrar" onclick="cerrarPopup()">&times;</span>
         <h2>Tabla de Datos</h2>
         <table id="tablaDatos">
-            <thead>
-                <tr>
-                    <th>Fecha de Solicitud</th>
-                    <th>Fecha de Ausencia</th>
-                    <th>Archivos</th>
-                    <th>Justificación</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aquí se llenará la tabla con datos dinámicamente -->
-                <tr>
-                <td>Fecha 1</td>
-                    <td>Fecha 2</td>
-                    <td>Archivo 1</td>
-                    <td>Justificación 1</td>
-                    <td>
-                        <button onclick="eliminarFila(this)">Eliminar</button>
-                        <button onclick="actualizarFila(this)">Actualizar</button>
-                    </td>
-                </tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th>Fecha de Solicitud</th>
+              <th>Fecha de Ausencia</th>
+              <th>Archivos</th>
+              <th>Justificación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Aquí se llenará la tabla con datos dinámicamente -->
+            <tr>
+              <td>Fecha 1</td>
+              <td>Fecha 2</td>
+              <td>Archivo 1</td>
+              <td>Justificación 1</td>
+              <td>
+                <button onclick="eliminarFila(this)">Eliminar</button>
+                <button onclick="actualizarFila(this)">Actualizar</button>
+              </td>
+            </tr>
+          </tbody>
         </table>
 
+      </div>
     </div>
-</div>
 
     <br><br>
     <br><br>

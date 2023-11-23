@@ -65,7 +65,7 @@ if (isset($_POST['update'])) {
         <div class="card">
           <div class="card-header">Editar solicitud</div>
           <div class="card-body">
-            <form action="edit.php?idJustificacionAusencia=<?php echo $_GET['idJustificacionAusencia']; ?>" method="POST">
+            <form action="edit2.php?idJustificacionAusencia=<?php echo $_GET['idJustificacionAusencia']; ?>" method="POST">
                 <div class="form-group row">
                     <label class="col-md-4 col-form-label custom-label">Id de la justificación</label>
                     <div class="col-md-8">
@@ -81,7 +81,7 @@ if (isset($_POST['update'])) {
                 <div class="form-group row">
                     <label class="col-md-4 col-form-label custom-label">Fecha de ausencia</label>
                     <div class="col-md-8">
-                    <input name="fechaAusencia" type="date" class="form-control" value="<?php echo $fechaAusencia; ?>" placeholder="Fecha de Ausencia">
+                    <input name="fechaAusencia" type="date" class="form-control" value="<?php echo $fechaAusencia; ?>" placeholder="Fecha de Ausencia" readonly>
                     </div>
                 </div>
                 <div class="form-group row">

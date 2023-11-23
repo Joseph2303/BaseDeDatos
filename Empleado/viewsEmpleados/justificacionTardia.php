@@ -10,10 +10,25 @@ include('../includ/proted.php');
 
 if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmpleado'])) {
 
-    function consultarJustificacion()
+    function consultarJustificacionTardia()
     {
         $idEmpleado = $_SESSION['empleadoData']['idEmpleado'];
-        $query = "SELECT * FROM justificacionTardia ORDER BY idJustificacionTardia DESC";
+        $query = "SELECT jt.[idJustificacionTardia]
+    ,jt.[fecha] AS justificacionFecha
+    ,jt.[documento]
+    ,jt.[justiTardia]
+    ,jt.[revision]
+    ,rt.[idRegistroTardia]
+    ,rt.[fecha] AS registroFecha
+    ,rt.[tipoTardia]
+    ,rt.[CantMinutos]
+    ,rt.[idHorario]
+    ,rt.[idEmpleado]
+    ,rt.[idMarca]
+    FROM [proyecto_bd].[dbo].[justificacionTardia] AS jt
+    INNER JOIN [proyecto_bd].[dbo].[registroTardia] AS rt ON jt.[idRegistroTardia] = rt.[idRegistroTardia]
+    WHERE rt.[idEmpleado] = $idEmpleado";
+
 
         try {
             $stmt = $GLOBALS['conn']->query($query);
@@ -25,7 +40,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         }
     }
 
-    $justificacionTardia = consultarJustificacion();
+    $justificacionTardia = consultarJustificacionTardia();
 }
 ?>
 
@@ -53,7 +68,7 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
             border-collapse: collapse;
             width: 100%;
             max-width: 950px;
-            
+
         }
 
         th,
@@ -158,24 +173,36 @@ if (isset($_SESSION['empleadoData']) && isset($_SESSION['empleadoData']['idEmple
         <div class="justificacion">
             <h1>Justificación de Tardía</h1>
         </div>
+        <br>
+        <div>
+            <input type="text" id="buscar" oninput="filtrar()" placeholder="Buscar justificación...">
+        </div>
+        <br>
         <table id="tabla">
             </thead>
             <tr>
                 <th>ID de Justificación Tardía</th>
                 <th>Fecha</th>
-                <th>Tipo de tardía</th>
-                <th>Cantidad de minutos tarde</th>
-                <th>Seleccionar</th>
+                <th>Documento</th>
+                <th>Jutificacion</th>
+                <th>Revision</th>
+                <th>Accion</th>
             </tr>
             </thead>
             <tbody>
                 <?php foreach ($justificacionTardia as $row) { ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['idRegistroTardia']); ?></td>
-                        <td><?php echo htmlspecialchars($row['fecha']); ?></td>
-                        <td><?php echo htmlspecialchars($row['tipoTardia']); ?></td>
-                        <td><?php echo htmlspecialchars($row['CantMinutos']); ?></td>
-                        <td><input type="checkbox" onchange="mostrarFormulario(this)"></td>
+                    <tr data-id="<?php echo htmlspecialchars($row['idJustificacionTardia']); ?>">
+                        <td><?php echo htmlspecialchars($row['idJustificacionTardia']); ?></td>
+                        <td><?php echo htmlspecialchars(date('Y-m-d', strtotime($row['justificacionFecha']))); ?></td>
+                        <td><?php echo htmlspecialchars($row['documento']); ?></td>
+                        <td><?php echo htmlspecialchars($row['justiTardia']); ?></td>
+                        <td><?php echo htmlspecialchars($row['revision']); ?></td>
+                        <td>
+                            <a href="registroTardia/edit.php?idJustificacionTardia=<?php echo htmlspecialchars($row['idJustificacionTardia']); ?>" class="btn btn-info">
+                                <i class="fas fa-marker"></i>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>

@@ -235,9 +235,11 @@
             <br>
             <br>
             <br>
-            <br>
             <li class="nav-item1">
               <a class="nav-link bi bi-box-arrow-right" href="viewsEncargados/logoutAdmin.php" onclick="" style="color: black;">  Cerrar sesión</a>
+            </li>
+            <li class="nav-item1">
+            <a  class="nav-link btn "  onclick="realizarBackup()">Realizar Backup</a >
             </li>
           ';
       } else {
@@ -322,54 +324,75 @@
     }
     ?>
   </div>
-
   <script>
-  function mostrarFormulario(checkbox) {
-    var formulario = document.getElementById("formulario");
-    if (checkbox.checked) {
-      formulario.style.display = "block";
-
-      var fechaActual = new Date();
-      var dia = fechaActual.getDate();
-      var mes = fechaActual.getMonth() + 1;
-      var año = fechaActual.getFullYear();
-
-      var fila = checkbox.parentNode.parentNode;
-      var idJustificacionAusencia = fila.getAttribute("data-id");
-      var fechaSolicitud = fila.children[1].textContent;
-      var fechaAusencia = fila.children[2].textContent;
-      var archivos = fila.children[3].textContent;
-      var justificacion = fila.children[4].textContent;
-
-      var fechaFormateada = año + '-' + (mes < 10 ? '0' + mes : mes) + '-' + (dia < 10 ? '0' + dia : dia);
-
-      document.getElementById("idJustificacionAusencia").value = idJustificacionAusencia;
-      document.getElementById("fechaSolicitud").value = fechaFormateada;
-      document.getElementById("fechaAusencia").value = fechaAusencia;
-      document.getElementById("archivos").value = archivos;
-      document.getElementById("justificacion").value = justificacion;
-
-    } else {
-      formulario.style.display = "none";
+    function realizarBackup() {
+      fetch('includ/respaldo.php', {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'realizarBackup'
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('Backup realizado con éxito');
+          } else {
+            throw new Error('Error al ejecutar el backup');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     }
-  }
-</script>
+  </script>
+  <script>
+    function mostrarFormulario(checkbox) {
+      var formulario = document.getElementById("formulario");
+      if (checkbox.checked) {
+        formulario.style.display = "inline-block";
+
+        var fechaActual = new Date();
+        var dia = fechaActual.getDate();
+        var mes = fechaActual.getMonth() + 1;
+        var año = fechaActual.getFullYear();
+
+        var fila = checkbox.parentNode.parentNode;
+        var idJustificacionAusencia = fila.getAttribute("data-id");
+        var fechaSolicitud = fila.children[1].textContent;
+        var fechaAusencia = fila.children[2].textContent;
+        var archivos = fila.children[3].textContent;
+        var justificacion = fila.children[4].textContent;
+
+        var fechaFormateada = año + '-' + (mes < 10 ? '0' + mes : mes) + '-' + (dia < 10 ? '0' + dia : dia);
+
+        document.getElementById("idJustificacionAusencia").value = idJustificacionAusencia;
+        document.getElementById("fechaSolicitud").value = fechaFormateada;
+        document.getElementById("fechaAusencia").value = fechaAusencia;
+        document.getElementById("archivos").value = archivos;
+        document.getElementById("justificacion").value = justificacion;
+
+      } else {
+        formulario.style.display = "none";
+      }
+    }
+  </script>
 
   <script>
     function cargarPagina(pagina) {
-        // Utiliza AJAX para cargar los datos de la página
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                // Actualiza el contenido de la tabla con los nuevos datos
-                document.getElementById("tabla").innerHTML = this.responseText;
-            }
-        };
-        xhttp.open("GET", "viewsEncargados/registroAusentismo.php?pagina=" + pagina, true);
-        xhttp.send();
+      // Utiliza AJAX para cargar los datos de la página
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Actualiza el contenido de la tabla con los nuevos datos
+          document.getElementById("tabla").innerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", "viewsEncargados/registroAusentismo.php?pagina=" + pagina, true);
+      xhttp.send();
     }
-
-</script>
+  </script>
 
 
   <script>
@@ -412,16 +435,6 @@
 
 
 <script>
-  document.getElementById('foto').addEventListener('change', function(e) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('imagen').src = e.target.result;
-      document.getElementById('imagen').style.display = 'block';
-    };
-    reader.readAsDataURL(this.files[0]);
-  });
-
-
   function mostrarPopup() {
     document.getElementById('popup').style.display = 'flex';
   }
@@ -491,18 +504,19 @@
     }
   }
 
-  function mostrarFormulario(checkboxElement) {
-   // var botones = document.querySelector('.botones');
+  /*function mostrarFormulario(checkboxElement) {
+    var botones = document.querySelector('.botones');
     var formulario = document.getElementById('formulario');
 
     if (checkboxElement.checked) {
-   //  botones.style.display = 'block';
+      botones.style.display = 'block';
       formulario.style.display = 'block';
     } else {
-    //  botones.style.display = 'none';
+      botones.style.display = 'none';
       formulario.style.display = 'none';
     }
-  }
+  }* */
+
   // Función para ocultar los botones cuando se hace clic fuera del checkbox
   document.addEventListener('click', function(event) {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -520,70 +534,5 @@
   }
 </script>
 
-
-
-
-
-<!--paginacion de Rtardia-->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Variables
-    var table = document.getElementById("tablaTardia");
-    var rows = table.getElementsByTagName("tr");
-    var numRows = rows.length;
-    var rowsPerPage = 5; // Puedes ajustar el número de filas por página aquí
-    var numPages = Math.ceil(numRows / rowsPerPage);
-
-    // Crear cuadro de selección para la cantidad de registros por página
-    var selectPerPage = document.createElement("select");
-    selectPerPage.id = "rowsPerPage";
-    var options = [5, 10, 20, 50]; // Puedes ajustar las opciones según tus necesidades
-    for (var i = 0; i < options.length; i++) {
-      var option = document.createElement("option");
-      option.value = options[i];
-      option.text = options[i];
-      selectPerPage.appendChild(option);
-    }
-    selectPerPage.addEventListener("change", function () {
-      rowsPerPage = parseInt(this.value);
-      numPages = Math.ceil(numRows / rowsPerPage);
-      showPage(1);
-    });
-
-    // Agregar el cuadro de selección al DOM
-    var container = document.querySelector(".container");
-    container.insertBefore(selectPerPage, table);
-
-    // Función para mostrar la página seleccionada
-    function showPage(page) {
-      for (var i = 0; i < numRows; i++) {
-        rows[i].style.display = i >= (page - 1) * rowsPerPage && i < page * rowsPerPage ? "" : "none";
-      }
-    }
-
-    // Función para generar los botones de paginación
-    function createPaginationButtons() {
-      var paginationContainer = document.createElement("div");
-      paginationContainer.classList.add("pagination");
-
-      for (var i = 1; i <= numPages; i++) {
-        var button = document.createElement("button");
-        button.innerHTML = i;
-        button.addEventListener("click", function () {
-          showPage(parseInt(this.innerHTML));
-        });
-        paginationContainer.appendChild(button);
-      }
-
-      container.appendChild(paginationContainer);
-    }
-
-    // Inicializar la tabla con la primera página
-    showPage(1);
-
-    // Crear botones de paginación
-    createPaginationButtons();
-  });
-</script>
 
 </html>

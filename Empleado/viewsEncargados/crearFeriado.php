@@ -161,58 +161,19 @@ $feriados = consultarDiasFeriados();
                             <td><?php echo htmlspecialchars($row['fecha']); ?></td>
                             <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
                             <td><?php echo htmlspecialchars($row['tipoFeriado']); ?></td>
+                            <td>
+                                <a href="diasFeriados/edit.php?idDiasFeriados=<?php echo htmlspecialchars($row['idDiasFeriados']); ?>" class="btn btn-info">
+                                    <i class="fas fa-marker"></i>
+                                </a>
+                                <a href="diasFeriados/delete.php?idDiasFeriados=<?php echo htmlspecialchars($row['idDiasFeriados']); ?>" class="btn btn-danger " onclick="return confirmarEliminacion();">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </td>
                         </tr>
                     <?php } ?>
-                    <tr>
-                        <td>Fecha 1</td>
-                        <td>Fecha 2</td>
-                        <td>Archivo 1</td>
-                        <td>Justificación 1</td>
-                        <td>
-                            <input type="checkbox" onchange="mostrarbotones(this)">
-                        </td>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
-            <div id="modal" style="
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-            ">
-                <div style="
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                
-                ">
-                    <span style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
-                    " onclick="cerrarModal()">&times;</span>
-                    <form id="formularioModificar" action="diasFeriados/save.php" method="POST" style="display: none;">
-                       
-                        <input type="submit" class="btn btn-info btn-block" name="save" value="Guardar">
-                    </form>
-                </div>
-            </div>
-            
-            <div class="botones" style="display: none;">
-                <button class="btn btn-primary btn-sm" onclick="mostrarFormulario(this)">Modificar</button>
-                <button class="btn btn-danger btn-sm" onclick="eliminar()">Eliminar</button>
-            </div>
+
         </div>
     </div>
 </main>
