@@ -32,9 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     if ($result) {
-      $_SESSION['message'] = 'Usuario creado exitosamente.';
+      $_SESSION['message_info'] = 'Usuario creado exitosamente.';
       $_SESSION['message_type'] = 'success';
-      $message_type = 'success';
       header('Location: userLogin.php'); // Redirige a userLogin.php
       exit; // Finaliza la ejecución del script después de la redirección
     } else {

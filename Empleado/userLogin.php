@@ -106,6 +106,9 @@ style="background-color: rgba(32, 124, 196, 0.8);">
   if (isset($_SESSION['message_danger'])){
     echo '<div id="success-message" class="alert alert-danger">' . $_SESSION['message_danger'] . '</div>';
     unset($_SESSION['message_danger']);
+  } elseif (isset($_SESSION['message_info'])){
+    echo '<div id="success-message" class="alert alert-info">' . $_SESSION['message_info'] . '</div>';
+    unset($_SESSION['message_info']);
   }
   ?>
 </div> 
