@@ -5,8 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 $host = 'localhost';
 $dbname = 'proyecto_bd';
-$username = 'Quintanilla';
-$password = '123';
+$username = 'jos2303';
+$password = '2303';
 $puerto = 1433;
 
 try {
