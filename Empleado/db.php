@@ -3,10 +3,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$host = 'localhost';
+$host = 'tcp:hcrbd.database.windows.net';
 $dbname = 'proyecto_bd';
-$username = 'jos2303';
-$password = '2303';
+$username = 'joseph';
+$password = 'jos23032000';
 $puerto = 1433;
 
 try {
