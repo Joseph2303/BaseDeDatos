@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $host = 'tcp:hcrbd.database.windows.net';
 $dbname = 'proyecto_bd';
 $username = 'joseph';
-$password = 'jos23032000';
+$password = 'Jos23032000';
 $puerto = 1433;
 
 try {
